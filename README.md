@@ -4,4 +4,8 @@ I've been away to python land for a while, but I'm back to the java jungle. This
 
 My current exploration has been around the GLSL shaders and geometry transformations.
 
-:white_check_mark:
+| Name                      | Description | Processing - Java  | p5js |
+|---------------------------|-------------|--------------------|------|
+| Placeholder Debut         |             | :white_check_mark: |      |
+| Square shift              |             | :white_check_mark: |      |
+| Steering Trails Blur GLSL |             | :white_check_mark: |      |
