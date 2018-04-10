@@ -8,8 +8,8 @@ My current exploration has been around the GLSL shaders and geometry transformat
 - [Markdown table generator](https://www.tablesgenerator.com/markdown_tables#)
 - [Book of shaders](http://thebookofshaders.com/)
 
-| id | **Name**                  | **Description**                                                                 | **Processing - Java** | **p5js** |
-|----|---------------------------|---------------------------------------------------------------------------------|-----------------------|----------|
+| id | **Name**                  | **Description**                                                                 | **Processing Java** | **p5js** |
+|----|---------------------------|---------------------------------------------------------------------------------|:-----------------------:|----------|
 | 1  | Placeholder Debut         | This is the debut sketch to start off this repo.                                | :white_check_mark:    |          |
 | 2  | Square shift              | Building upon the previous sketch and adding a square motion.                   | :white_check_mark:    |          |
 | 3  | Steering Trails Blur GLSL | Testing out filter blur GLSL shader by applying it to steering trails.          | :white_check_mark:    |          |
