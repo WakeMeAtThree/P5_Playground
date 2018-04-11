@@ -4,9 +4,10 @@ I've been away to python land for a while, but I'm back to the java jungle. This
 
 My current exploration has been around the GLSL shaders and geometry transformations.
 
-# Useful tools to maintain this README
+# Useful tools and resources
 - [Markdown table generator](https://www.tablesgenerator.com/markdown_tables#)
 - [Book of shaders](http://thebookofshaders.com/)
+- [Andres Colubri's PShader tutorial](https://processing.org/tutorials/pshader/) as well as the accompanying [github repo](https://github.com/codeanticode/pshader-tutorials)
 
 | id | **Name**                  | **Description**                                                                 | **Processing Java** | **p5js** |
 |----|---------------------------|---------------------------------------------------------------------------------|:-----------------------:|----------|
