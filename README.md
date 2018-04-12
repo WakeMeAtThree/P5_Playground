@@ -9,9 +9,10 @@ My current exploration has been around the GLSL shaders and geometry transformat
 - [Book of shaders](http://thebookofshaders.com/)
 - [Andres Colubri's PShader tutorial](https://processing.org/tutorials/pshader/) as well as the accompanying [github repo](https://github.com/codeanticode/pshader-tutorials)
 
-| id | **Name**                  | **Description**                                                                 | **Processing Java** | **p5js** |
-|----|---------------------------|---------------------------------------------------------------------------------|:-----------------------:|----------|
-| 1  | Placeholder Debut         | This is the debut sketch to start off this repo.                                | :white_check_mark:    |          |
-| 2  | Square shift              | Building upon the previous sketch and adding a square motion.                   | :white_check_mark:    |          |
-| 3  | Steering Trails Blur GLSL | Testing out filter blur GLSL shader by applying it to steering trails.          | :white_check_mark:    |          |
-| 4  | Ten Print Class           | Factoring out a ten print sketch into its own class, testing blur shader on it. | :white_check_mark:    |          |
+| id | **Name**                  | **Description**                                                                                                                                                                                      | **Processing - Java** | **p5js** | **Python**         |
+|----|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|----------|--------------------|
+| 1  | Placeholder Debut         | This is the debut sketch to start off this repo.                                                                                                                                                     | :white_check_mark:    |          |                    |
+| 2  | Square shift              | Building upon the previous sketch and adding a square motion.                                                                                                                                        | :white_check_mark:    |          |                    |
+| 3  | Steering Trails Blur GLSL | Testing out filter blur GLSL shader by applying it to steering trails.                                                                                                                               | :white_check_mark:    |          |                    |
+| 4  | Ten Print Class           | Factoring out a ten print sketch into its own class, testing blur shader on it.                                                                                                                      | :white_check_mark:    |          |                    |
+| 5  | JSON streamer             | Ball bouncing class written in python that runs and streams to a json, with a processing sketch that visualizes contents of json in real time. Experimenting with ways of connecting both languages. | :white_check_mark:    |          | :white_check_mark: |
