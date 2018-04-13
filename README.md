@@ -8,6 +8,7 @@ My current exploration has been around the GLSL shaders and geometry transformat
 - [Markdown table generator](https://www.tablesgenerator.com/markdown_tables#)
 - [Book of shaders](http://thebookofshaders.com/)
 - [Andres Colubri's PShader tutorial](https://processing.org/tutorials/pshader/) as well as the accompanying [github repo](https://github.com/codeanticode/pshader-tutorials)
+- [Shadershop for creating functions](http://tobyschachman.com/Shadershop/)
 
 | id | **Name**                  | **Description**                                                                                                                                                                                      | **Processing - Java** | **p5js** | **Python**         |
 |----|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|----------|--------------------|
