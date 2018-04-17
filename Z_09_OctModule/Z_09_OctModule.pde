@@ -73,6 +73,8 @@ void draw() {
   //translate(0, map(mouseX, 0, width, 0, -0.586*scl));
   elline(0, scl*1, 0.828*scl);
   popMatrix();
+  
+  //saveFrame("animation/frame####.png");
 }
 
 void elline(float x, float y, float r) {
