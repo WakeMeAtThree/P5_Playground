@@ -16,6 +16,8 @@ void draw() {
       module(2*scl*x, 2*scl*y, scl);
     }
   }
+  
+  //saveFrame("animation/output####.jpg");
 }
 void module(float x, float y, float scl) {
   pushMatrix();

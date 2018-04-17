@@ -1,7 +1,7 @@
 boolean displayPoints = false;
 int div = 15;
 float scl;
-float speed = 10;
+float speed = 20;
 float shift;
 void setup() {
   size(1000, 1000);
@@ -19,7 +19,7 @@ void draw() {
   }
   shift += speed;
   if(shift > width || shift < 0) speed *= -1;
-  
+  //saveFrame("animation/output####.jpg");
 }
 
 void module(float x, float y, float scl, float param) {
