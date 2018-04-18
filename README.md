@@ -3,6 +3,15 @@
 I've been away to python land for a while, but I'm back to the java jungle. This repo is a daily commitment to *writing* a sketch a day in processing, no matter how simple or basic. 
 
 My current exploration has been around the GLSL shaders and geometry transformations.
+
+# Useful tools and resources
+- [Markdown table generator](https://www.tablesgenerator.com/markdown_tables#)
+- [Book of shaders](http://thebookofshaders.com/)
+  - [Shaping functions](http://www.thebookofshaders.com/05/)
+- [Andres Colubri's PShader tutorial](https://processing.org/tutorials/pshader/) as well as the accompanying [github repo](https://github.com/codeanticode/pshader-tutorials)
+- [Shadershop for creating functions](http://tobyschachman.com/Shadershop/)
+- [Color generator](https://coolors.co/) which is useful for generating some color palettes
+
 | id | **Name**                                   | **Description**                                                                                                                                                                                                                                                                                                     | **Processing - Java** | **p5js** | **Python**         |
 |----|--------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|----------|--------------------|
 | 1  | Placeholder Debut                          | This is the debut sketch to start off this repo.                                                                                                                                                                                                                                                                    | :white_check_mark:    |          |                    |
