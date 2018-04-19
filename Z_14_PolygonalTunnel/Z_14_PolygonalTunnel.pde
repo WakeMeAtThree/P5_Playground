@@ -22,5 +22,5 @@ void draw() {
   a += speed;
   if (a > 5000 || a < 0) speed *= -1;
   
-  saveFrame("animation/Hey####.jpg")
+  //saveFrame("animation/Hey####.jpg")
 }
