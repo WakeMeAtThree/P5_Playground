@@ -2,7 +2,7 @@
 
 I've been away to python land for a while, but I'm back to the java jungle. This repo is a daily commitment to *writing* a sketch a day in processing, no matter how simple or basic. 
 
-My exploration started off around the GLSL shaders and geometry transformations. It then went through Daniel Shiffman coding challenges, then started to be inspired by the processing's twitter community. The open source community for this is quite wonderful and generous with the knowledge they're providing, which I will try my best to name in this repository.
+My exploration started off around the GLSL shaders and geometry transformations. It then went through Daniel Shiffman coding challenges, then started to be inspired by the processing's twitter community. The open source community for processing is quite wonderful and generous with the knowledge they're providing, which I will try my best to name in this repository. 
 
 # Useful tools and resources
 - [Markdown table generator](https://www.tablesgenerator.com/markdown_tables#)
@@ -13,8 +13,10 @@ My exploration started off around the GLSL shaders and geometry transformations.
 - [Color generator](https://coolors.co/) which is useful for generating some color palettes
 
 # Post-repo ideas:
-- Varying the CodingTrain CC's in its own repo
+- Varying the CodingTrain CC's in its own repo (as well as a plan for plans for physical manifestations of it)
 - Python implementation of one of these sketches using numpy + matplotlib
+
+___
 
 
 | id | **Name**                                   | **Description**                                                                                                                                                                                                                                                                                                     | **Processing - Java** | **p5js** | **Python**         |
