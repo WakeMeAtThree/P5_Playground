@@ -13,8 +13,10 @@ My exploration started off around the GLSL shaders and geometry transformations.
 - [Color generator](https://coolors.co/) which is useful for generating some color palettes
 
 # Post-repo ideas:
-- Varying the CodingTrain CC's in its own repo
+- Varying the CodingTrain CC's in its own repo (as well as a plan for plans for physical manifestations of it)
 - Python implementation of one of these sketches using numpy + matplotlib
+
+___
 
 
 | id | **Name**                                   | **Description**                                                                                                                                                                                                                                                                                                     | **Processing - Java** | **p5js** | **Python**         |
