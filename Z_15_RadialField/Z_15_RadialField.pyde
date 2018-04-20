@@ -17,6 +17,5 @@ def draw():
     for j,i in enumerate(sorted(pointslist)):
         i[1].grow(millis()/1000+15.0*j/len(pointslist))
         i[1].display()
-        print(i[1])
    
     
