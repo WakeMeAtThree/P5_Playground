@@ -13,3 +13,4 @@
 12,Octagonal Module Class,,:white_check_mark:,,
 13,Lerp tricks,Playing around with lerp and delay following the Etienne Jacob's tutorial on using lerp for some interesting effects,:white_check_mark:,,
 14,Polygonal Tunnel,Created a polygonal tunnel sketch after being inspired by some of hexiosis gifs,:white_check_mark:,,
+15,Radial Field,"Created a center radial field effect. Useful tool in future processing sketches. Need to translate to java, as I struggled to figure out a way of sorting in java that is as intuitive as python.",,,:white_check_mark:
