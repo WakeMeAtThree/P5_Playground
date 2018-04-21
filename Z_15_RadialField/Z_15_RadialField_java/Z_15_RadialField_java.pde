@@ -27,7 +27,7 @@ int nodesize;
 void setup() {
   size(1000, 1000);
   background(0);
-
+frameRate(15);
   
   for (int i = 0; i < 50; i++) {
     for (int j = 0; j < 50; j++) {
@@ -54,10 +54,12 @@ void draw() {
   for (int j = 0; j < nodesize; j++) {
     Node p = nodes.get(j);
     float param = (1.0*j/nodesize);
-    p.grow(millis()/50.0+param*25.0);
+    p.grow(millis()/500.0+param*25.0);
     color mix = lerpColor(color(213, 1, 68), color(23, 239, 201), abs(sin(0.1*millis()/50+50.0*j/nodes.size()*0.1)));
     fill(mix);
     noStroke();
     p.display();
   }
+  
+  //saveFrame("animation/output####.png");
 }
