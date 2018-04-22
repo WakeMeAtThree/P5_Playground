@@ -14,5 +14,5 @@
 13,Lerp tricks,Playing around with lerp and delay following the Etienne Jacob's tutorial on using lerp for some interesting effects,:white_check_mark:,,
 14,Polygonal Tunnel,Created a polygonal tunnel sketch after being inspired by some of hexiosis gifs,:white_check_mark:,,
 15,Radial Field,"Created a center radial field effect. Useful tool in future processing sketches. ~~Need to translate to java, as I struggled to figure out a way of sorting in java that is as intuitive as python.~~ Translated to java after getting help from /processing subreddit (Thanks, mrsirrisrm!)",:white_check_mark:,,:white_check_mark:
-16,Hammer Time,Followed along with [Jeremy Behreandt’s] (https://medium.com/@behreajj/3d-models-in-processing-7d968a7cede5) medium article on basic material properties for 3d shapes in processing. Created a sample geometry to play with in processing. ,,,
+16,Hammer Time,Followed along with [Jeremy Behreandt’s] (https://medium.com/@behreajj/3d-models-in-processing-7d968a7cede5) medium article on basic material properties for 3d shapes in processing. Created a sample geometry to play with in processing. ,:white_check_mark:,,
 17,To be determined,To do: better ways of controlling saveFrame and gif quality,,,
