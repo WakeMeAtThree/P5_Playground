@@ -15,7 +15,7 @@ void draw() {
   //background(0);
   filter(blur);
   translate(width/2, height/2, a);
-  scale(map(sin(a),-1,1,20,60));
+  scale(map(sin(a),-1,1,0,70));
   lights1();
   
   ////Light options
@@ -26,7 +26,7 @@ void draw() {
   //directionalLight(128, 128, 128, 0, 1, 0);
   
   //Shape Material properties
-  s.setFill(color(252, 237, 245, 255));
+  s.setFill(color(252, 237, 245, map(sin(a),-1,1,10,150)));
   s.setAmbient(0xff7f7f00);
   //s.setSpecular(0xff0000ff);
   //s.setEmissive(0xffff0000);
@@ -39,7 +39,7 @@ void draw() {
   //a += speed;
   //if (a > 5000 || a < 0) speed *= -1;
 
-  //saveFrame("animation/Hey####.jpg")
+  //saveFrame("animation/Hey####.jpg");
   a+=0.01;
   b+=0.05;
   c+=0.04;

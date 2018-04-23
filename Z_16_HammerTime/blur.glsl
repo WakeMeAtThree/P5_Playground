@@ -61,14 +61,14 @@ void main(void) {
   //                  0.0 * col6 - 1.0 * col7 + 0.0 * col8);            
 
   // Box blur
-  // vec4 sum = (1.0 * col0 + 1.0 * col1 + 1.0 * col2 +  
-  //             1.0 * col3 + 1.0 * col4 + 1.0 * col5 +
-  //             1.0 * col6 + 1.0 * col7 + 1.0 * col8) / 9.0;            
+  vec4 sum = (1.0 * col0 + 2.0 * col1 + 1.0 * col2 +  
+              2.0 * col3 + 1.0 * col4 + 2.0 * col5 +
+              1.0 * col6 + 2.0 * col7 + 1.0 * col8) /12.99;            
 
   // Gaussian blur
-  vec4 sum = (1.0 * col0 + 2.0 * col1 + 1.0 * col2 +  
-              2.0 * col3 + 4.0 * col4 + 2.0 * col5 +
-              1.0 * col6 + 2.0 * col7 + 1.0 * col8) / 16.0;            
+  // vec4 sum = (1.0 * col0 + 2.0 * col1 + 1.0 * col2 +  
+  //             2.0 * col3 + 4.0 * col4 + 2.0 * col5 +
+  //             1.0 * col6 + 2.0 * col7 + 1.0 * col8) / 16.0;            
 
 
   gl_FragColor = vec4(sum.rgb, 1.0) * vertColor;  
