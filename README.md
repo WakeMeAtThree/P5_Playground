@@ -17,7 +17,7 @@ My exploration started off around the GLSL shaders and geometry transformations.
 - Python implementation of one of these sketches using numpy + matplotlib
 - Accompanying LQ/HQ gifs OR p5js translations for sharing online
 - Default 3d model of my own for future use (elaborately intricate to accomodate different surface conditions)
-
+- Observation: I'm gravitating more and more towards patterns-based sketches.
 ___
 
 |        |                                            |                                                                                                                                                                                                                                                                                                                                                         |                       |          |                    | 
