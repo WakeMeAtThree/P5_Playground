@@ -4,6 +4,7 @@ float a;
 void setup() {
   size(400, 400);
   background(255);
+  smooth(8);
   Alistballs = new ArrayList<Ball>();
 
   for (int i = -1; i < 12; i++) {
@@ -23,6 +24,7 @@ void draw() {
     p.run(a);
   }
   a += 0.025;
+  //saveFrame("animation/output####.gif");
 }
 
 void mousePressed() {
