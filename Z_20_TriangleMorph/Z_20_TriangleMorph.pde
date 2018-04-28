@@ -8,6 +8,7 @@ void setup() {
   background(255);
   s = loadShape("TriCirc.svg");
   frameRate(30);
+  // blendMode(DIFFERENCE);
   
   init_verts = new ArrayList<PVector>();
   target_verts = new ArrayList<PVector>();
