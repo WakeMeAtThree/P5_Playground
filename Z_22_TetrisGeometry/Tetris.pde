@@ -1,0 +1,4 @@
+class Tetris {
+  Tetris() {
+  }
+}
