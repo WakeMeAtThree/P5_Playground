@@ -19,6 +19,7 @@ My exploration started off around the GLSL shaders and geometry transformations.
 - Accompanying LQ/HQ gifs OR p5js translations for sharing online
 - Default 3d model of my own for future use (elaborately intricate to accomodate different surface conditions)
 - Observation: I'm gravitating more and more towards patterns-based sketches.
+- Recreating classic games might also be a good idea to work towards
 ___
 
 **id**  |  **Name**                                    |  **Description**                                                                                                                                                                                                                                                                                                                                          |  **Processing - Java**  |  **p5js**  |  **Python**
