@@ -21,6 +21,7 @@ My exploration started off around the GLSL shaders and geometry transformations.
 - Default 3d model of my own for future use (elaborately intricate to accomodate different surface conditions)
 - Observation: I'm gravitating more and more towards patterns-based sketches.
 - Recreating classic games might also be a good idea to work towards
+- Take a look at this and [implement it in one of your sketches](https://stackoverflow.com/questions/8200243/can-i-store-function-names-in-final-hashmap-for-execution/8200427).
 ___
 
 **id**  |  **Name**                                    |  **Description**                                                                                                                                                                                                                                                                                                                                          |  **Processing - Java**  |  **p5js**  |  **Python**
