@@ -22,6 +22,19 @@ My exploration started off around the GLSL shaders and geometry transformations.
 - Observation: I'm gravitating more and more towards patterns-based sketches.
 - Recreating classic games might also be a good idea to work towards
 - Take a look at this and [implement it in one of your sketches](https://stackoverflow.com/questions/8200243/can-i-store-function-names-in-final-hashmap-for-execution/8200427).
+
+# Useful code snippets
+
+Turning image sequence to a video
+```
+ffmpeg -framerate 30 -i animation%3d.png -pix_fmt yuv420p output.mp4
+```
+
+Concatenating two videos to create a reverse loop
+```
+ffmpeg -i input.mov -filter_complex "[0:v]reverse,fifo[r];[0:v][r] concat=n=2:v=1 [v]" -map "[v]" output.mp4
+```
+
 ___
 
 **id**  |  **Name**                                    |  **Description**                                                                                                                                                                                                                                                                                                                                          |  **Processing - Java**  |  **p5js**  |  **Python**
