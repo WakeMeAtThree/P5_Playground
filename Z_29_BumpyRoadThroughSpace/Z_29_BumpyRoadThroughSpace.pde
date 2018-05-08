@@ -1,18 +1,22 @@
 Star[] stars = new Star[1600];
 float[] randomlist = new float[ceil(PI/0.05)];
-float speed,a;
+float speed,a,aspeed;
 
 void setup() {
-  size(800, 800);
+  size(560, 560);
   //fullScreen();
   background(0);
+  
   for (int i = 0; i < stars.length; i++) {
     stars[i] = new Star();
   }
+  
   for(int i = 0; i < randomlist.length; i++){
   randomlist[i] = random(0,5);
   }
   
+  a = -1.8;
+  aspeed = 0.05;
 }
 
 void draw() {
@@ -30,8 +34,7 @@ void draw() {
     stars[i].update();
     stars[i].display();
   }
-  a += 0.05;
+  a += aspeed;
+  if(a > 5.1 || a < -1.8) aspeed *= -1;
   //saveFrame("output/animation###.png");
-  //Add a way of reversing value inputs in a better way
- 
 }
