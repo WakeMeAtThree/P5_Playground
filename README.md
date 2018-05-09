@@ -24,6 +24,7 @@ My exploration started off around the GLSL shaders and geometry transformations.
 - Take a look at this and [implement it in one of your sketches](https://stackoverflow.com/questions/8200243/can-i-store-function-names-in-final-hashmap-for-execution/8200427).
 - [Alexander Calder sculptures](https://www.google.ae/search?q=alexander+calder&safe=strict&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiPm9bPvPjaAhVMuhQKHYvyB3oQ_AUICigB&biw=1163&bih=536)
 - Recreate this [moving head sculpture in processing](https://twitter.com/Rainmaker1973/status/993837231247851520)
+- typing spaces
 
 # Useful code snippets
 
