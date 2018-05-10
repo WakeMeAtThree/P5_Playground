@@ -28,6 +28,8 @@ My exploration started off around the GLSL shaders and geometry transformations.
 
 # Useful code snippets
 
+The following are useful `ffmpeg` commands for making animation gifs/mp4. 
+
 Turning image sequence to a video
 ```
 ffmpeg -framerate 30 -i animation%3d.png -pix_fmt yuv420p output.mp4
