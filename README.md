@@ -22,8 +22,13 @@ My exploration started off around the GLSL shaders and geometry transformations.
 - Observation: I'm gravitating more and more towards patterns-based sketches.
 - Recreating classic games might also be a good idea to work towards
 - Take a look at this and [implement it in one of your sketches](https://stackoverflow.com/questions/8200243/can-i-store-function-names-in-final-hashmap-for-execution/8200427).
+- [Alexander Calder sculptures](https://www.google.ae/search?q=alexander+calder&safe=strict&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiPm9bPvPjaAhVMuhQKHYvyB3oQ_AUICigB&biw=1163&bih=536)
+- Recreate this [moving head sculpture in processing](https://twitter.com/Rainmaker1973/status/993837231247851520)
+- typing spaces
 
 # Useful code snippets
+
+The following are useful `ffmpeg` commands for making animation gifs/mp4. 
 
 Turning image sequence to a video
 ```
@@ -76,3 +81,7 @@ ___
 28      |  Chromatic Abberation                        |  Sketch illustrating an approach of creating a chromatic abberation effect.                                                                                                                                                                                                                                                                               |  :white_check_mark:     |            |
 29      |  Bumpy Road Through Space                    |  Variation on the Daniel Shiffman's starfield coding challenge                                                                                                                                                                                                                                                                                            |  :white_check_mark:     |            |
 30      |  Muqarnas                                    |  Variation on the Daniel Shiffman's phyllotaxis coding challenge. Possibly useful for making muqarnas designs in the future.                                                                                                                                                                                                                              |  :white_check_mark:     |            |
+
+# Final thoughts
+
+~30 days of Processing~ finished on April 8th, 2018. Overall, it was a good haul and I picked up good tools for processing toolbox. Moving forward I'm planning to spin off some off these sketches into a series deserving of its own repo. There is a lot of things to mine from in modular/pattern based sketches. Unresolved issues include figuring out a way to move mesh vertices as if it's welded and more optimized gifs (though making good head way using ffmpeg). May revisit this to either check off p5js sketches or to turn this into 60 (accumulative) days of processing, or to just turn this into a processing playground. 
