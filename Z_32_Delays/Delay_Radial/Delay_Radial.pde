@@ -28,9 +28,11 @@ void draw() {
     float x = modules.get(i).x;
     float y = modules.get(i).y;
     module(x, y, scl, sin(a+param));
+    
   }
-
+if(a >= TWO_PI) exit();
   a+=0.05;
+  saveFrame("output/animation###.png");
 }
 
 void module(float x, float y, float scl, float param) {

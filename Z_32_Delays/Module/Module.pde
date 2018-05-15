@@ -18,6 +18,7 @@ void draw() {
     }
   }
   a+=0.05;
+  saveFrame("output/animation-###.png");
 }
 
 void module(float x, float y, float scl, float param) {

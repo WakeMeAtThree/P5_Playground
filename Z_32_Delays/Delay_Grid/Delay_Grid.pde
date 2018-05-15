@@ -16,7 +16,10 @@ void draw() {
       module(2*scl*x, 2*scl*y, scl, sin(a+param));
     }
   }
+  if(a >= TWO_PI) exit();
   a+=0.05;
+  saveFrame("output/animation###.png");
+  
 }
 
 void module(float x, float y, float scl, float param) {
