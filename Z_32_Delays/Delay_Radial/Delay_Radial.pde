@@ -17,16 +17,7 @@ void setup() {
       modules.add(new PVector(2*scl*x, 2*scl*y));
     }
   }
-
-  Collections.sort(modules, new Comparator<PVector>() {
-    @Override
-      public int compare(PVector lhs, PVector rhs) {
-      double d1 = Math.hypot(lhs.x - width/2, lhs.y - height/2);
-      double d2 = Math.hypot(rhs.x - width/2, rhs.y - height/2);
-      return d1 < d2 ? -1 : (d1 == d2 ? 0 : 1);
-    }
-  }
-  );
+sortPoints();
 }
 
 void draw() {
@@ -96,4 +87,18 @@ void elline(float x, float y, float r, float param) {
   translate(x, y);
   ellipse(0, 0, r, r*0.1);
   popMatrix();
+}
+
+
+void sortPoints(){
+  
+  Collections.sort(modules, new Comparator<PVector>() {
+    @Override
+      public int compare(PVector lhs, PVector rhs) {
+      double d1 = Math.hypot(lhs.x - width/2, lhs.y - height/2);
+      double d2 = Math.hypot(rhs.x - width/2, rhs.y - height/2);
+      return d1 < d2 ? -1 : (d1 == d2 ? 0 : 1);
+    }
+  }
+  );
 }
