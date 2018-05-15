@@ -84,4 +84,11 @@ ___
 
 # Final thoughts
 
-~30 days of Processing~ finished on April 8th, 2018. Overall, it was a good haul and I picked up good tools for processing toolbox. Moving forward I'm planning to spin off some off these sketches into a series deserving of its own repo. There is a lot of things to mine from in modular/pattern based sketches. Unresolved issues include figuring out a way to move mesh vertices as if it's welded and more optimized gifs (though making good head way using ffmpeg). May revisit this to either check off p5js sketches or to turn this into 60 (accumulative) days of processing, or to just turn this into a processing playground. 
+~30 days of Processing~, finished on April 8th, 2018. 
+
+Overall, it was a good haul and I picked up good tools for processing toolbox. Moving forward I'm planning to spin off some off these sketches into a series deserving of its own repo. There is a lot of things to mine from in modular/pattern based sketches. Unresolved issues include:
+
+- figuring out a way to move mesh vertices as if it's welded 
+- and more optimized gifs (though making good head way using ffmpeg). 
+
+May revisit this to either check off p5js sketches or to turn this into 60 (accumulative) days of processing, or to just turn this into a processing playground. 
