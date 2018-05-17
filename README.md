@@ -46,6 +46,11 @@ ffmpeg -i output.mp4 -vf palettegen palette.png
 ffmpeg -ss 2.6 -t 1.3 -i output.mp4 -i palette.png -filter_complex “fps=30,scale=400:-1:flags=lanczos[x];[x][1:v]paletteuse” output.gif
 ```
 
+Running a processing sketch in terminal [Check this out](https://github.com/processing/processing/wiki/Command-Line):
+
+```
+processing-java --sketch=%cd% --run
+```
 
 ___
 
