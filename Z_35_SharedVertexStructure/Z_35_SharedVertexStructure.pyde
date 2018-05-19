@@ -38,7 +38,7 @@ def draw():
     #Setting up coordinate system
     translate(width/2, height/2, 0);
     rotateZ(PI);
-    scale(3.5);
+    scale(2.5);
     
     #Display
     fill(lerpColor(color(0x0CFFD2), color(0xD60043), map(cs(a), -1, 1, 0, 1)))
