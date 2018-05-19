@@ -1,16 +1,15 @@
 def setup():
     size(400,400)
     background(255)
-    fill(0)
+    fill(255)
     noLoop()
     noStroke();
     
 def draw():
-    background(255)
-    
+    blendMode(DIFFERENCE)
     #Move origin to middle of canvas
     translate(width/2,height/2)
-    convexPolygon(100,6)
+    convexPolygon(100,4)
 
 def convexPolygon(r,n):
     """Function written as described by @Hamoid in the Processing discourse forums
