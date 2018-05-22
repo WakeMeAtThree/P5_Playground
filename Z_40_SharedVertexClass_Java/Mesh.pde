@@ -35,10 +35,10 @@ class Mesh {
   void morph(Mesh initial, Mesh target, float a) {
     //Morphs between initial and target mesh
     for (int i = 0; i < this.vertices.size(); i++) {
-      float param = 1.0 * i/this.vertices.size();
+      float param = 10.0 * i/this.vertices.size();
       PVector vec = PVector.lerp(initial.vertices.get(i), 
                                  target.vertices.get(i), 
-                                 map(sin(a+param), -1, 1, 0, 1));
+                                 map(cs(a+param), -1, 1, 0, 1));
       this.vertices.set(i, vec);
     }
     
@@ -64,8 +64,8 @@ class Mesh {
       float param1 = 1.0 *i/faces.size();
 
       for (int j = 0; j < faces.get(i).length; j++) {
-        float param2 = 2.5 * i/faces.get(i).length;
-        fill(lerpColor(#0EC0E1, #DD3A7C, map(sin(a+param1+param2), -1, 1, 0, 1)));  
+        float param2 = 0.0 * i/faces.get(i).length;
+        fill(lerpColor(#0EC0E1, #DD3A7C, map(cs(a+param1+param2), -1, 1, 0, 1)));  
 
         int index = faces.get(i)[j];
         PVector vec = this.vertices.get(index);
