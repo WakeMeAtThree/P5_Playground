@@ -12,6 +12,11 @@ Grid delay snippet:
     }
   }
 ```
+Radial delay:
+
+```java
+float param = (pow(x,2)+pow(y,2))/(sqrt(2)*div);
+```
 
 Radial sort:
 ```java
