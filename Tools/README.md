@@ -12,7 +12,7 @@ Grid delay snippet:
     }
   }
 ```
-Radial delay:
+Radial delay (other shaping functions available from book of shaders):
 
 ```java
 float param = (pow(x,2)+pow(y,2))/(sqrt(2)*div);
