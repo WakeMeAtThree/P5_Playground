@@ -4,7 +4,7 @@ float a, scl;
 void setup() {
   size(400, 400);
   blendMode(DIFFERENCE);
-  sketch = new Morph(loadShape("TriCircSmoothCent.svg"));
+  sketch = new Morph(loadShape("TritoCirc.svg"));
   scl = 1;
 }
 
@@ -25,7 +25,7 @@ void draw() {
     }
   }
 
-  a+=0.1;
+  a+=0.025;
 }
 
 // Set of functions taken from Dave Whyte's sketches
