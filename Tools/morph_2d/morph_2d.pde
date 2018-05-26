@@ -8,7 +8,7 @@ void setup() {
   size(500, 500);
   background(255);
   blendMode(DIFFERENCE);
-  s = loadShape("TriCircSmooth.svg");
+  s = loadShape("hextocirc.svg");
   frameRate(30);
 
   init_verts = new ArrayList<PVector>();
@@ -21,16 +21,15 @@ void setup() {
     target_verts.add(s.getChild(1).getVertex(i).copy());
   }
 
-  coords=new PVector(375,334); //284, 252
-
+  coords=new PVector(145, 42); //284, 252
 }
 
 void draw() {
   background(255);
-  scale(0.25);
+  scale(1);
   for (int i = -1; i < 30; i++) {
     for (int j = -1; j < 30; j++) {
-      float param = 8.0*(i+j)/(82);
+      float param = 4.0*(i+j)/(82);
       if (j % 2 == 0) {
         func(coords.x*i, coords.y*j, param);
       } else {
@@ -38,8 +37,8 @@ void draw() {
       }
     }
   }
-
-  //saveFrame("animation/output####.jpg");
+  //if (a > TWO_PI) exit();
+  //saveFrame("output/animation###.png");
   if (mousePressed) println(mouseX, mouseY);
 }
 
@@ -53,7 +52,7 @@ void func(float x, float y, float param) {
     PVector v_target;
     v_target = target_verts.get(i);
 
-    PVector mix = PVector.lerp(v_init, v_target, 2.6*sin(0.044*a+param+PI));
+    PVector mix = PVector.lerp(v_init, v_target, map(cs(a+param), -1, 1, -5, 2));
 
     s.getChild(0).setVertex(i, mix);
   }
@@ -70,5 +69,23 @@ void func(float x, float y, float param) {
 
   popStyle();
 
-  a+=0.001;
+  a+=0.0001/2;
+}
+
+
+// Set of functions taken from Dave Whyte's sketches
+
+float ease(float p) {
+  return 3*p*p - 2*p*p*p;
+}
+
+float ease(float p, float g) {
+  if (p < 0.5) 
+    return 0.5 * pow(2*p, g);
+  else
+    return 1 - 0.5 * pow(2*(1 - p), g);
+}
+
+float cs(float q) {
+  return lerp(-1, 1, ease(map(cos(q), -1, 1, 0, 1), 5));
 }
