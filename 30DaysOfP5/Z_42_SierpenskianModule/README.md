@@ -1,0 +1,1 @@
+![](sierpenskian.gif)
