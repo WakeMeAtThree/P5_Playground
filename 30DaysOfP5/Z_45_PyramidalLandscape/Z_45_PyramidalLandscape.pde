@@ -5,9 +5,9 @@ float a, spacing;
 PVector eye, center, light1, light2;
 float gScale = 2.0;
 void setup() {
-  size(1000, 500*gScale, P3D);
+  size(1000, 1000, P3D);
   smooth(8);
-  background(0);
+
   ortho();
 
   //Create points in order
@@ -28,10 +28,12 @@ void setup() {
   light1 = new PVector(-37.984, 44.367, 43.878);
   light2 = new PVector(-30.810, -65.024, 45.515);
 
+
 }
 
 void draw() {
-  background(0);
+  
+
   lights();
   directionalLight(204, 204, 204, light1.x, light1.y, light1.z);
 
@@ -41,16 +43,16 @@ void draw() {
     0, 0, -1);
 
   //Move to origin
-  translate(130*gScale, 130*gScale);
+  translate(168*gScale, 161*gScale);
   if (mousePressed) println(mouseX, mouseY);
 
   //Ground Plane
-  fill(15);
+  fill(#0CFFD2);
   beginShape();
-  vertex(1000, 1000, 0);
-  vertex(-1000, 1000, 0);
-  vertex(-1000, -1000, 0);
-  vertex(1000, -1000, 0);
+  vertex(2000, 2000, 0);
+  vertex(-2000, 2000, 0);
+  vertex(-2000, -2000, 0);
+  vertex(2000, -2000, 0);
   endShape(CLOSE);
 
   for (int i = -14; i < 0; i++) {
@@ -64,9 +66,11 @@ void draw() {
 
 
   //Animate
-  a -= 0.04;
-  if(-a >= TWO_PI) exit();
-  saveFrame("output/animation###.png");
+  a -= 0.075;
+  if(-a > 2*TWO_PI) exit();
+  //saveFrame("output/animation###.png");
+
+  
 }
 
 void module(float x, float y, float param) {
