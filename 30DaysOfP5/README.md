@@ -53,6 +53,15 @@ Running a processing sketch in terminal [Check this out](https://github.com/proc
 processing-java --sketch=%cd% --run
 ```
 
+Reseting changes in a local clone
+
+```git
+# Revert changes to modified files.
+git reset --hard
+
+# Remove all untracked files and directories. (`-f` is `force`, `-d` is `remove directories`)
+git clean -fd
+```
 ___
 
 **id**  |  **Name**                                    |  **Description**                                                                                                                                                                                                                                                                                                                                          |  **Processing - Java**  |  **p5js**  |  **Python**
