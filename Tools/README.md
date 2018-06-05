@@ -1,4 +1,7 @@
 # Tools and Snippets
+### Alternative coordinate systems:
+- [Spherical Coordinates](https://en.wikipedia.org/wiki/Spherical_coordinate_system)
+- [Cylindrical Coordinates](https://en.wikipedia.org/wiki/Cylindrical_coordinate_system)
 
 ### Workflow goes as follows:
 Module => Tiles => Delay/offset => Render
