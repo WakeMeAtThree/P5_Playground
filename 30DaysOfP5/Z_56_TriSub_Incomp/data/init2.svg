@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+ 
+<svg xmlns="http://www.w3.org/2000/svg" version = "1.1"
+      preserveAspectRatio = "xMinYMin meet" viewBox = "0 0 150 150">
+ <path d= "M-1.5393,3.5548 
+L 0.0,-0.0
+L -1.5393,0.8887
+L 0.0,3.5548
+L 1.5393,0.8887
+L 0.0,-0.
+ " stroke = "black" stroke-width = ".1" fill = "none" />
+</svg>
