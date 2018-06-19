@@ -6,7 +6,7 @@ The playground is different from a dedicated library repository as it relies on 
 
 By this year's (2018) end, I intend to have the following accomplished:
 
-- [ ] Finalize the file structure of this repo
+- [X] Finalize the file structure of this repo
     - Daily_Sketches
         - Archive
         - 2018_{Number}_{Name}
