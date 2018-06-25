@@ -11,25 +11,28 @@ void setup() {
 
 void draw() {
   background(lerpColor(#000000, #000000, 1-map(cs(a), -1, 1, 0, 1)));
-translate(width/2,height/2);
-for(int i = -10; i < 10; i++){
-  for(int j = -10; j < 10; j++){
-    float param = 3.0*(i+j)/20;
-    if(j % 2==0){
-module(i*mouseX,j*mouseY,a+param);
-    } else {
-      module(i*mouseX+mouseX/2,j*mouseY,a+param);
+  translate(width/2, height/2);
+  float spaceX=51;//79-222-51
+
+  float spaceY=60;//41-27-60;
+  for (int i = -10; i < 10; i++) {
+    for (int j = -10; j < 10; j++) {
+      float param = 3.0*(i+j)/20;
+      if (j % 2==0) {
+        module(i*spaceX, j*spaceY, a+param);
+      } else {
+        module(i*spaceX+spaceX/2, j*spaceY, a+param);
+      }
     }
   }
-}
 
-    if (mousePressed) println(mouseX,mouseY);
+  if (mousePressed) println(mouseX, mouseY);
   //Animate
   a+=0.04;
 
   //Save Frames
-  //if(a > TWO_PI) exit();
-  //saveFrame("output/animation###.png");
+  if(a > TWO_PI) exit();
+  //saveFrame("output3/animation###.png");
 }
 void module(float x, float y, float a) {
   pushMatrix();
