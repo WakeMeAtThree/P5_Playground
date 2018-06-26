@@ -6,12 +6,6 @@ I've been away to python land for a while, but I'm back to the java jungle. This
 My exploration started off around the GLSL shaders and geometry transformations. It then went through Daniel Shiffman coding challenges, then started to be inspired by the processing's twitter community. The open source community for processing is quite wonderful and generous with the knowledge they're providing, which I will try my best to name in this repository. 
 
 # Useful tools and resources
-- [Markdown table generator](https://www.tablesgenerator.com/markdown_tables#)
-- [Another table generator](https://donatstudios.com/CsvToMarkdownTable)
-- [Book of shaders](http://thebookofshaders.com/)
-  - [Shaping functions](http://www.thebookofshaders.com/05/)
-- [Andres Colubri's PShader tutorial](https://processing.org/tutorials/pshader/) as well as the accompanying [github repo](https://github.com/codeanticode/pshader-tutorials)
-- [Shadershop for creating functions](http://tobyschachman.com/Shadershop/)
 - [Color generator](https://coolors.co/) which is useful for generating some color palettes
 
 # Post-repo ideas:
