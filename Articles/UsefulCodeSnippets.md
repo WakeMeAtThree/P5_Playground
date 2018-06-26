@@ -15,8 +15,8 @@ ffmpeg -i input.mov -filter_complex "[0:v]reverse,fifo[r];[0:v][r] concat=n=2:v=
 Generating palette.png and using it to create smaller gifs. [Reference 1.](https://engineering.giphy.com/how-to-make-gifs-with-ffmpeg/) [Reference 2.](https://medium.com/@colten_jackson/doing-the-gif-thing-on-debian-82b9760a8483)
 ```
 ffmpeg -i output.mp4 -vf palettegen palette.png
-ffmpeg -i output.mp4 -i palette.png -filter_complex ìfps=30,scale=400:-1:flags=lanczos[x];[x][1:v]paletteuseî output.gif
-ffmpeg -ss 2.6 -t 1.3 -i output.mp4 -i palette.png -filter_complex ìfps=30,scale=400:-1:flags=lanczos[x];[x][1:v]paletteuseî output.gif
+ffmpeg -i output.mp4 -i palette.png -filter_complex ‚Äúfps=30,scale=400:-1:flags=lanczos[x];[x][1:v]paletteuse‚Äù output.gif
+ffmpeg -ss 2.6 -t 1.3 -i output.mp4 -i palette.png -filter_complex ‚Äúfps=30,scale=400:-1:flags=lanczos[x];[x][1:v]paletteuse‚Äù output.gif
 ```
 
 Running a processing sketch in terminal [Check this out](https://github.com/processing/processing/wiki/Command-Line):
@@ -45,3 +45,8 @@ for filename in os.listdir("."):
         newName = "2018_0"+filename[2:]
         os.rename(f"{filename}",f"{newName}")
 ```
+
+Table generators in markdown
+
+- [Markdown table generator](https://www.tablesgenerator.com/markdown_tables#)
+- [Another table generator](https://donatstudios.com/CsvToMarkdownTable)
