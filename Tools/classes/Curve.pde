@@ -11,7 +11,7 @@ class Curve {
     }
     
     //Closed curve boolean
-    this.closeState = true;
+    this.closeState = false;
 
   }
 

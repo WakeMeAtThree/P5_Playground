@@ -1,3 +1,8 @@
+/*
+- Write lerpMeshStates()
+- Make lerpCurveStates and lerpMeshStates part of DataLoader class 
+- DataLoader without using SVG files
+*/
 ArrayList<PVector> vertices;
 Curve aCurve1, aCurve2, aCurve3;
 DataLoader uno;
@@ -9,7 +14,7 @@ void setup() {
 
 
   //new DataLoader(number of keyFrames, number of parts in each keyFrame, true for Curves/alse for Meshes
-  uno = new DataLoader(3, 3, true);
+  uno = new DataLoader(2, 4, true);
   aCurve1 = new Curve(loadShape("11.svg"), true);
   
   
@@ -22,10 +27,12 @@ void setup() {
 void draw() {
   background(255);
   
-  for (Curve crv : lerpCurveStates(curveStates, 3*cs(a))) {
+  for (Curve crv : lerpCurveStates(curveStates, map(cs(a),-1,1,0,1))) {
+    noStroke();
+    fill(0);
     crv.display();
   }
-  aCurve1.display();
+
   a += 0.01;
 }
 
