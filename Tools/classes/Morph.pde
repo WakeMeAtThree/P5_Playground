@@ -5,7 +5,7 @@ class Morph {
     this.curveStates = curves.getCurveStates();
   }
   void display(float a) {
-    for (Curve crv : lerpCurveStates(curveStates, map(cs(a), -1, 1, 0, 1))) {
+    for (Curve crv : lerpCurveStates(curveStates, func(a,1))) {
       crv.display();
     }
   }
