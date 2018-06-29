@@ -107,9 +107,3 @@ class Mesh {
   void pipe() {
   }
 }
-
-Mesh mlerp(Mesh initial, Mesh target, float a) {
-  ArrayList<PVector> morphVerts = lerpVerts(initial.vertices, target.vertices, a);
-  color morphColor = lerpColor(initial.meshColor, target.meshColor, a);
-  return new Mesh(morphVerts, initial.faces, morphColor);
-}

@@ -12,7 +12,6 @@ class Mesh {
     for (int i = 0; i < curve.getChild(0).getVertexCount(); i++) {
       this.vertices.add(curve.getChild(0).getVertex(i).copy());
     }
-
   }
 
   void morph(Mesh initial, Mesh target, float a) {
@@ -20,16 +19,15 @@ class Mesh {
     for (int i = 0; i < this.vertices.size(); i++) {
       float param = 0.0 * i/this.vertices.size();
       PVector vec = PVector.lerp(initial.vertices.get(i), 
-                          target.vertices.get(i), 
-                          map(cs(a+param), -1, 1, 0, 1));
+        target.vertices.get(i), 
+        map(cs(a+param), -1, 1, 0, 1));
       this.vertices.set(i, vec);
     }
-    
   }
   void display(float scl) {
-stroke(0);
-strokeWeight(map(cs(a), -1, 1, 1, 0));
-noStroke();
+    stroke(0);
+    strokeWeight(map(cs(a), -1, 1, 1, 0));
+    noStroke();
     fill(255);
     pushMatrix();
 

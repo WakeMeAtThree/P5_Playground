@@ -3,8 +3,8 @@ import java.util.*;
 class Mesh {
   PShape curve;
   ArrayList<PVector> vertices;
-
-  Mesh(PShape curve) {
+  color meshColor;
+  Mesh(PShape curve, color meshColor) {
     this.curve = curve;
     this.vertices = new ArrayList<PVector>();
 
@@ -12,6 +12,7 @@ class Mesh {
     for (int i = 0; i < curve.getChild(0).getVertexCount(); i++) {
       this.vertices.add(curve.getChild(0).getVertex(i).copy());
     }
+    this.meshColor = meshColor;
   }
 
   void morph(float a, Mesh... meshes) {
@@ -40,7 +41,7 @@ class Mesh {
     //strokeWeight(0.02);
     noStroke();
     scale(scl);
-
+    fill(meshColor);
     beginShape();
     int count = 0;
     for (PVector p : this.vertices) {
@@ -48,6 +49,7 @@ class Mesh {
     color option = lerpColor(#FF0000,#FF00FF,map(sin(a+param), -1, 1, 0, 1));
     count++;
     //fill(option,180);
+    
       vertex(p.x, p.y);
     }
     endShape(CLOSE);

@@ -1,54 +1,47 @@
-//class Morph {
-//  /* Linear (or other) interpolation of 
-//   object attributes (position, color) that
-//   can be used to display at a certain 
-//   parameter
-   
-//   Takes multiple states as a list in the order 
-//   given*/
+class Morph {
+  ArrayList<ArrayList<Curve>> curveStates;
 
-//  Mesh[] keyFramesMeshes;
-//  ArrayList<Curve>[] keyFramesCurves;
+  Morph(DataLoader curves) {
+    this.curveStates = curves.getCurveStates();
+  }
+  void display(float a) {
+    for (Curve crv : lerpCurveStates(curveStates, map(cs(a), -1, 1, 0, 1))) {
+      crv.display();
+    }
+  }
+  /* Chain of Lerps below */
 
-//  /* Constructor for Curve objects */
-//  Morph(Mesh... meshes) { 
-//    this.keyFramesMeshes=meshes;
-//  }
+  ArrayList<Curve> lerpCurveStates(ArrayList<ArrayList<Curve>> curveStates, float amt) {
+    if (curveStates.size()==1) { 
+      return curveStates.get(0);
+    }
 
-//  /* Constructor for Mesh objects */
-//  Morph(ArrayList<Curve>... curves) {
-//    this.keyFramesCurves = curves;
-//  }
+    float spacing = 1.0/(curveStates.size()-1);
+    int lhs = floor(amt / spacing);
+    int rhs = ceil(amt / spacing);
 
-//  void display(float time) {
-//    /* Takes a value between 0 and 1 to alternate
-//     between states */
-//    //this.lerpMeshes(time, keyFramesMeshes).display(time);
-//  }
+    try {
+      return curvesLerp(curveStates.get(lhs), curveStates.get(rhs), amt%spacing/spacing);
+    } 
+    catch(Exception e) {
+      return curvesLerp(curveStates.get(constrain(lhs, 0, curveStates.size()-2)), curveStates.get(constrain(rhs, 1, curveStates.size()-1)), amt);
+    }
+  }
 
-//  ArrayList<Curve> lerpCurves(float amt, ArrayList<ArrayList<Curve>> curves) {
-//    if (curves.size()==1) { 
-//      return curves.get(0);
-//    }
+  ArrayList<Curve> curvesLerp(ArrayList<Curve> c1, ArrayList<Curve> c2, float amt) {
+    ArrayList<Curve> blendedCurves = new ArrayList<Curve>();
+    for (int i = 0; i < c1.size(); i++) {
+      blendedCurves.add(vertsLerp(c1.get(i), c2.get(i), amt));
+    }
+    return blendedCurves;
+  }
 
-//    float spacing = 1.0/(curves.size()-1);
-//    int lhs = floor(amt / spacing);
-//    int rhs = ceil(amt / spacing);
-
-//    try {
-//      return curveLerp(curves.get(lhs), curves.get(rhs), amt%spacing/spacing);
-//    } 
-//    catch(Exception e) {
-//      return curveLerp(curves.get(constrain(lhs, 0, curves.size()-2)), curves.get(constrain(rhs, 1, curves.size()-1)), amt);
-//    }
-//  }
-//}
-///*
-//ArrayList<Curve> curveLerp(ArrayList<Curve> v1, ArrayList<Curve> v2, float amt){
-//  ArrayList<Curve> blendCurve;
-//  for(int i = 0; i < v1.size(); i++){
-    
-//  }
-//  //return output;
-//}
-//*/
+  Curve vertsLerp(Curve crv1, Curve crv2, float amt) {
+    ArrayList<PVector> blendVerts = new ArrayList<PVector>();
+    color blendColor = lerpColor(crv1.curveColor, crv2.curveColor, amt);
+    for (int i = 0; i < crv1.vertices.size(); i++) {
+      blendVerts.add(PVector.lerp(crv1.vertices.get(i), crv2.vertices.get(i), amt));
+    }
+    return new Curve(blendVerts, crv1.closeState, blendColor);
+  }
+}

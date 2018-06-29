@@ -1,12 +1,12 @@
 Mesh initial, blend, target;
 Meshes pizza;
 float a, b;
-float scl = 6;
+float scl = 8;
 void setup() {
   size(400, 400);
   //blendMode(DIFFERENCE);
   smooth(8);
-  pizza = new Meshes(3);
+  pizza = new Meshes(33);
 }
 
 void draw() {
@@ -15,22 +15,12 @@ void draw() {
   fill(0,10);
   rect(0,0,width,height);
   popStyle();
-  if(mousePressed) println(mouseY);
- // translate(width/2,height/2);
- scale(3);
-  for(int i = -5; i < 10; i++){
-    for(int j = -5; j < 10; j++){
-      if(j%2==0){
-  module(i*109.08,j*95,a);
-      } else {
-        module(i*109.08+109.08/2,j*94.5,a);
-      }
-    }
-  }
-
+  
+  translate(width/2,height/2);
+  module(0,0,a);
 
   //Animate
-  a+=0.025;
+  a+=0.0125;
 
   //Save Frames
   //if(a > TWO_PI) exit();
@@ -40,7 +30,7 @@ void module(float x, float y, float a) {
   pushMatrix();
   translate(x, y);
   pizza.morph(a);
-  pizza.display(5);
+  pizza.display(10);
   popMatrix();
 }
 // Set of ease functions below borrowed from Dave Whyte's sketches
