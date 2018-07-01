@@ -43,18 +43,6 @@ class Curve {
     }
   }
 
-  void translate(PVector dir) {
-    for (int i = 0; i < vertices.size(); i++) {
-      vertices.set(i, vertices.get(i).add(dir));
-    }
-  }
-
-  void rotate() {
-  }
-
-  void shear() {
-  }
-
   /* Wishlist (There's probably another library for this) */
 
   void offset() {

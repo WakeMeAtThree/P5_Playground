@@ -13,14 +13,15 @@ class DataLoader {
      goes like:
      {NumberOfKeyFrame}{NumberOfPart}.{obj/svg}
      */
-
-    color[] options = {color(255, 0, 0), color(0, 255, 0), color(0, 0, 255)};
+    
+    //Set the color for each keyFrame state
+    color[] options = {#0EC0E1, #DD3A7C};
 
     if (CrvOrMesh) {
       for (int i = 1; i < states+1; i++) {
         ArrayList<Curve> curveImports = new ArrayList<Curve>();
         for (int j = 1; j < parts+1; j++) {
-          curveImports.add(new Curve(loadShape(i+""+j+".svg"), false, options[(int)i%3]));
+          curveImports.add(new Curve(loadShape(i+""+j+".svg"), false, options[(int)(i-1)%3]));
         }
         curveStates.add(curveImports);
       }
@@ -29,17 +30,13 @@ class DataLoader {
         ArrayList<Mesh> meshImports = new ArrayList<Mesh>();
         for (int j = 1; j < parts+1; j++) {
 
-          meshImports.add(new Mesh(loadShape(i+""+j+".obj"), options[(int)i%3]));
+          meshImports.add(new Mesh(loadShape(i+""+j+".obj"), options[(int)(i-1)%3]));
         }
         meshStates.add(meshImports);
       }
     }
     this.CrvOrMesh = CrvOrMesh;
   }
-
-  /* Coordinate Systems Functions
-   TODO: maybe this needs to be 
-   inherited? */
 
   void scale(float scl) {
     if (CrvOrMesh) {
@@ -52,22 +49,6 @@ class DataLoader {
       for (ArrayList<Mesh> meshList : meshStates) {
         for (Mesh msh : meshList) {
           msh.scale(scl);
-        }
-      }
-    }
-  }
-
-  void translate(PVector dir) {
-    if(CrvOrMesh){
-    for (ArrayList<Curve> crvList : curveStates) {
-      for (Curve crv : crvList) {
-        crv.translate(dir);
-      }
-    }
-    } else {
-      for (ArrayList<Mesh> meshList : meshStates) {
-        for (Mesh msh : meshList) {
-          msh.translate(dir);
         }
       }
     }

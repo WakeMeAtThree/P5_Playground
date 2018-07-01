@@ -47,12 +47,16 @@ class Mesh {
   void display() {
     /* CONSIDER MOVING THIS FUNCTION TO A 
      DIFFERENT CLASS */
-    float delayFaces=0;
+    float delayFaces=1.0;
     float delayVerts=0;
-
+    //color darkerColor = color((int)red(meshColor)/1.5,(int)green(meshColor)/1.5,(int)blue(meshColor)/1.5);
+    fill(meshColor);
     beginShape(QUADS);
     for (int i = 0; i < faces.size(); i++) {
       float param1 = delayFaces *i/faces.size();
+      
+      //fill(lerpColor(meshColor,darkerColor,param1));
+      //fill(lerpColor(#13daff, #f73b87,param1));
       for (int j = 0; j < faces.get(i).length; j++) {
         float param2 = delayVerts * j/faces.get(i).length;
         int index = faces.get(i)[j];
