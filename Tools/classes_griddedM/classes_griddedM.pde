@@ -16,37 +16,38 @@ ArrayList<Morph> data;
 DataLoader uno;
 Morph due;
 float a;
-
+PShape hey;
 void setup() {
-  size(400, 400);
-
+  size(400, 400, P3D);
+  ortho();
   //Initializing morph list
   data = new ArrayList<Morph>();
-
+  
   //For loop to create a grid of DataLoader objects
-  for (int i = 0; i < 6; i++) {
-    for (int j = 0; j < 6; j++) {
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4; j++) {
       //DataLoader(number of keyFrames, number of parts in each keyFrame, true for Curves/else for Meshes
-      uno = new DataLoader(2, 27, false);  
+      
 
       /* 
        Coordinate manipulation done on the vectors
        to avoid scaling/messing with strokeWeights default settings
        */
-
-      uno.scale(35);
-      uno.translate(new PVector(i*75, j*75));
+      uno = new DataLoader(2, 1, false);  
+      uno.scale(75);
+      uno.translate(new PVector(i*125, j*125));
       uno.waveShift = 1.0*(i+j)/6;
-
-      due = new Morph(uno, true);
+      
+      due = new Morph(uno, false);
       data.add(due);
+
     }
   }
 }
 
 void draw() {
   background(255);
-  noStroke();
+  //noStroke();
 
   for (Morph due : data) {
     due.display(a);

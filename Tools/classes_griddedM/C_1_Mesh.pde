@@ -9,7 +9,7 @@ class Mesh {
   /* Constructor that takes PShape directly */
   Mesh(PShape obj, color meshColor) {
     //Add all vertices to arraylist
-    obj = loadShape("mesh1.obj");
+
     for (int i = 0; i < obj.getChildCount(); i++) {
       for (int j = 0; j < obj.getChild(i).getVertexCount(); j++) {
         PVector vec = obj.getChild(i).getVertex(j);
@@ -57,12 +57,22 @@ class Mesh {
         float param2 = delayVerts * j/faces.get(i).length;
         int index = faces.get(i)[j];
         PVector vec = this.vertices.get(index);
+        //println(vec);
         vertex(vec.x, vec.y, vec.z);
       }
     }
     endShape();
   }
-
+  void scale(float scl) {
+    for (int i = 0; i < vertices.size(); i++) {
+      vertices.set(i, vertices.get(i).mult(scl));
+    }
+  }
+  void translate(PVector dir) {
+    for (int i = 0; i < vertices.size(); i++) {
+      vertices.set(i, vertices.get(i).add(dir));
+    }
+  }
   /* Wishlist (There's probably another library for this) */
 
   void subdivide() {

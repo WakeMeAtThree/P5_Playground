@@ -5,6 +5,7 @@ class DataLoader {
   ArrayList<ArrayList<Curve>> curveStates = new ArrayList<ArrayList<Curve>>();
   ArrayList<ArrayList<Mesh>> meshStates = new ArrayList<ArrayList<Mesh>>();
   float waveShift;
+  boolean CrvOrMesh;
   DataLoader(int states, int parts, boolean CrvOrMesh) {
 
     /* Takes in number of keyframes (states) and
@@ -27,12 +28,13 @@ class DataLoader {
       for (int i = 1; i < states+1; i++) {
         ArrayList<Mesh> meshImports = new ArrayList<Mesh>();
         for (int j = 1; j < parts+1; j++) {
-          PShape input = loadShape("mesh1.obj");
-          meshImports.add(new Mesh(input, options[(int)i%3]));
+
+          meshImports.add(new Mesh(loadShape(i+""+j+".obj"), options[(int)i%3]));
         }
         meshStates.add(meshImports);
       }
     }
+    this.CrvOrMesh = CrvOrMesh;
   }
 
   /* Coordinate Systems Functions
@@ -40,17 +42,33 @@ class DataLoader {
    inherited? */
 
   void scale(float scl) {
-    for (ArrayList<Curve> crvList : curveStates) {
-      for (Curve crv : crvList) {
-        crv.scale(scl);
+    if (CrvOrMesh) {
+      for (ArrayList<Curve> crvList : curveStates) {
+        for (Curve crv : crvList) {
+          crv.scale(scl);
+        }
+      }
+    } else {
+      for (ArrayList<Mesh> meshList : meshStates) {
+        for (Mesh msh : meshList) {
+          msh.scale(scl);
+        }
       }
     }
   }
 
   void translate(PVector dir) {
+    if(CrvOrMesh){
     for (ArrayList<Curve> crvList : curveStates) {
       for (Curve crv : crvList) {
         crv.translate(dir);
+      }
+    }
+    } else {
+      for (ArrayList<Mesh> meshList : meshStates) {
+        for (Mesh msh : meshList) {
+          msh.translate(dir);
+        }
       }
     }
   }
