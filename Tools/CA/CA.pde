@@ -1,6 +1,7 @@
 //Chromatic abberation trick I learnt from Dave Whyte
 
 PImage red, green;
+float a;
 
 void setup() {
   size(400, 400);
@@ -9,8 +10,8 @@ void setup() {
 
 void draw() {
   background(0);
-  float offsetx = map(mouseX, 0, width, 0.000,0.1);
-  float offsety = map(mouseY, 0, height, 0.000,0.1);
+  float offsetx = map(sin(a), -1,1, 0.000,0.1);
+  float offsety = map(sin(a), -1, 1, 0.000,0.1);
   if(mousePressed) println(offsetx,offsety);
   
   //Get red channel pixels
@@ -43,6 +44,7 @@ void draw() {
   for (int i=0; i<pixels.length; i++)
     pixels[i] = color(red(red.pixels[i]), green(green.pixels[i]), blue(pixels[i]));
   updatePixels();
+  a += 0.1;
 }
 
 void mySketch() {
