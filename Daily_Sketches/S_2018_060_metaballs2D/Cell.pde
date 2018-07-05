@@ -21,7 +21,7 @@ class Cell {
   }
 
   PVector[] getCorners() {
-    PVector[] output = {A, B, C, D};
+    PVector[] output = {A, B, D, C};
     return output;
   }
 
@@ -45,45 +45,103 @@ class Cell {
       break;
     case 1:
       verts.add(CD);
-      verts.add(D);
-      verts.add(BD);
+      verts.add(C);
+      verts.add(AC);
       break;
     case 2:
-      verts.add(AC);
-      verts.add(C);
+      verts.add(BD);
+      verts.add(D);
       verts.add(CD);
       break;
     case 3:
+      verts.add(AC);
+      verts.add(C);
+      verts.add(D);
+      verts.add(BD);
       break;
     case 4:
+      verts.add(BD);
+      verts.add(AB);
+      verts.add(B);
       break;
     case 5:
+      verts.add(C);
+      verts.add(AC);
+      verts.add(AB);
+      verts.add(BD);
+      verts.add(CD);
       break;
     case 6:
+      verts.add(CD);
+      verts.add(AB);
+      verts.add(B);
+      verts.add(D);
       break;
     case 7:
+      verts.add(AB);
+      verts.add(B);
+      verts.add(D);
+      verts.add(C);
+      verts.add(AC);
       break;
     case 8:
+      verts.add(AC);
+      verts.add(A);
+      verts.add(AB);
       break;
     case 9:
+      verts.add(A);
+      verts.add(AB);
+      verts.add(CD);
+      verts.add(C);
       break;
     case 10:
+      verts.add(A);
+      verts.add(AB);
+      verts.add(BD);
+      verts.add(D);
+      verts.add(CD);
+      verts.add(AC);
       break;
     case 11:
+      verts.add(AB);
+      verts.add(BD);
+      verts.add(D);
+      verts.add(C);
+      verts.add(A);
       break;
     case 12:
+      verts.add(A);
+      verts.add(B);
+      verts.add(BD);
+      verts.add(AC);
       break;
     case 13:
+      verts.add(A);
+      verts.add(B);
+      verts.add(BD);
+      verts.add(CD);
+      verts.add(C);
       break;
     case 14:
+      verts.add(A);
+      verts.add(B);
+      verts.add(D);
+      verts.add(CD);
+      verts.add(AC);
       break;
     case 15:
+      verts.add(A);
+      verts.add(B);
+      verts.add(D);
+      verts.add(C);
       break;
     }
 
     pushStyle();
     noStroke();
     fill(0, 255, 0);
+    //stroke(0,255,0);
     beginShape();
     for (PVector p : verts) {
       vertex(p.x, p.y);

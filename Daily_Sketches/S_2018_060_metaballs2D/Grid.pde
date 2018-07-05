@@ -35,7 +35,7 @@ class Grid {
           c.boolVals[i]=true;
           strokeWeight(5);
           stroke(0, 255, 0);
-          point(p.x, p.y);
+          //point(p.x, p.y);
         } else {
           c.boolVals[i]=false;
         }
@@ -53,7 +53,7 @@ class Grid {
       //}
       strokeWeight(2);
       stroke(128);
-      point(c.center.x, c.center.y);
+      //point(c.center.x, c.center.y);
     }
     popStyle();
   }

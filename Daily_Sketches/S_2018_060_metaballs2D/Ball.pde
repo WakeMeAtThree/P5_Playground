@@ -9,7 +9,7 @@ class Ball {
   void run() {
     update();
     bounce();
-    display();
+    //display();
   }
   void update() {
     loc.add(vel);
