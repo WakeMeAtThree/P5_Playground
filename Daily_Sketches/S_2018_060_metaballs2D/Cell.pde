@@ -37,7 +37,7 @@ class Cell {
     return output;
   }
 
-  public void display() {
+  public void display(color someColor) {
     ArrayList<PVector> verts  = new ArrayList<PVector>();
 
     switch(getKey()) {
@@ -140,7 +140,7 @@ class Cell {
 
     pushStyle();
     noStroke();
-    fill(0, 255, 0);
+    fill(someColor);
     //stroke(0,255,0);
     beginShape();
     for (PVector p : verts) {
@@ -149,4 +149,6 @@ class Cell {
     endShape(CLOSE);
     popStyle();
   }
+  
+
 }

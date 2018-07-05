@@ -30,18 +30,31 @@ class Grid {
     rectMode(CENTER);
     for (Cell c : cells) {
 
+      float totalRed = 0;
+      float totalGreen = 0;
+      float totalBlue = 0;
+      
       for (int i = 0; i < c.getCorners().length; i++) {
         PVector p = c.getCorners()[i];
         if (pointInCircles(p)) {
           c.boolVals[i]=true;
-          strokeWeight(5);
-          stroke(0, 255, 0);
-          point(p.x, p.y);
+ 
+          color colorBlend = summationFuncColor(p);
+          totalRed += red(colorBlend);
+          totalGreen += green(colorBlend);
+          totalBlue += blue(colorBlend);
+          
+          //stroke(summationFuncColor(p));
+          //point(p.x, p.y);
         } else {
           c.boolVals[i]=false;
         }
       }
-    //c.display();
+      //totalRed = totalRed==0 ? 255*4: totalRed;
+      //totalGreen = totalGreen==0 ? 255*4: totalGreen;
+      //totalBlue = totalBlue==0 ? 255*4: totalBlue;
+      
+      c.display(color(totalRed/4,totalGreen/4,totalBlue/4));
 
       //}
       //if (pointInCircles(c.center)) {
@@ -52,9 +65,9 @@ class Grid {
       //  stroke(0, 255, 0);
       //  point(c.center.x, c.center.y);
       //}
-      strokeWeight(2);
-      stroke(128);
-      point(c.center.x, c.center.y);
+      //strokeWeight(2);
+      //stroke(128);
+      //point(c.center.x, c.center.y);
     }
     popStyle();
   }
@@ -73,7 +86,7 @@ class Grid {
     return summationFunc(point)>=1;
   }
 
-  public float summationFunc(PVector point) {
+  float summationFunc(PVector point) {
     /* 2D function from the article */
     float output = 0;
     for (Ball b : ballList) {
@@ -82,5 +95,34 @@ class Grid {
       output += numerator/denominator;
     }
     return output;
+  }
+  
+    public color summationFuncColor(PVector point) {
+    /* 2D function from the article */
+    float weightTotal = 0;
+    
+    float totalRed=0;
+    float totalGreen=0;
+    float totalBlue=0;
+    
+    for (Ball b : ballList) {
+      color someColor = b.hello;
+      float numerator = pow(b.diameter/2, 2);
+      float denominator = pow((point.x-b.loc.x), 2)+pow((point.y-b.loc.y), 2);
+      
+      totalRed += red(someColor) * numerator/denominator;
+      totalGreen += green(someColor) * numerator/denominator;
+      totalBlue += blue(someColor) * numerator/denominator;
+      
+      weightTotal += numerator/denominator;
+    }
+    totalRed *= 1/weightTotal;
+    totalGreen *= 1/weightTotal;
+    totalBlue *= 1/weightTotal;
+    
+    return color(totalRed,totalGreen,totalBlue);
+  }
+  void updateMidpoints(){
+    
   }
 }
