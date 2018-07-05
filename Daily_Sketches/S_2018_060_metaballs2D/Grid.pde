@@ -1,7 +1,11 @@
 class Grid {
   int x, y;
   float spaceX, spaceY;
-  ArrayList<PVector> gridPoints;
+
+  //ArrayList<PVector> gridPoints;
+  //ArrayList<PVector> cornerPoints;
+  ArrayList<Cell> cells;
+
   ArrayList<Ball> ballList;
   Grid(int x, int y, ArrayList<Ball> ballList) {
     this.x = x;
@@ -9,38 +13,67 @@ class Grid {
     this.spaceX = 1.0*width/x;
     this.spaceY = 1.0*height/y;
 
-    gridPoints = new ArrayList<PVector>();
+    cells = new ArrayList<Cell>();
     for (int i = 0; i < x; i++) {
       for (int j = 0; j < y; j++) {
-        gridPoints.add(new PVector(spaceX*i+spaceX/2, spaceY*j+spaceY/2));
+        cells.add(new Cell(spaceX*i+spaceX/2, spaceY*j+spaceY/2, spaceX, spaceY));
       }
     }
+
     this.ballList = ballList;
   }
 
   void display() {
     pushStyle();
-    strokeWeight(2);
+
     rectMode(CENTER);
-    for(PVector p: gridPoints){
-      if(pointInCircles(p)){
-        noStroke();
-        fill(0,255,0);
-        rect(p.x,p.y,spaceX,spaceY);
+    for (Cell c : cells) {
+
+      for (int i = 0; i < c.getCorners().length; i++) {
+        PVector p = c.getCorners()[i];
+        if (pointInCircles(p)) {
+          c.boolVals[i]=true;
+          strokeWeight(5);
+          stroke(0, 255, 0);
+          point(p.x, p.y);
+        } else {
+          c.boolVals[i]=false;
+        }
       }
-      
-      
+    c.display();
+
+      //}
+      //if (pointInCircles(c.center)) {
+      //  noStroke();
+      //  //fill(0, 255, 0);
+      //  //rect(c.center.x, c.center.y, spaceX, spaceY);
+      //  strokeWeight(5);
+      //  stroke(0, 255, 0);
+      //  point(c.center.x, c.center.y);
+      //}
+      strokeWeight(2);
       stroke(128);
-      point(p.x,p.y);
+      point(c.center.x, c.center.y);
     }
     popStyle();
   }
 
+  void displayCorners() {
+    for (Cell c : cells) {
+      strokeWeight(2);
+      point(c.A.x, c.A.y);
+      point(c.B.x, c.B.y);
+      point(c.C.x, c.C.y);
+      point(c.D.x, c.D.y);
+    }
+  }
   boolean pointInCircles(PVector point) {
+    /* Inequality expression from the article */
     return summationFunc(point)>=1;
   }
 
   float summationFunc(PVector point) {
+    /* 2D function from the article */
     float output = 0;
     for (Ball b : ballList) {
       float numerator = pow(b.diameter/2, 2);
