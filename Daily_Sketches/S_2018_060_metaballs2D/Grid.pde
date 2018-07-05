@@ -33,17 +33,20 @@ class Grid {
       float totalRed = 0;
       float totalGreen = 0;
       float totalBlue = 0;
-      
+
       for (int i = 0; i < c.getCorners().length; i++) {
         PVector p = c.getCorners()[i];
-        if (pointInCircles(p)) {
+        float val = summationFunc(p, ballList);
+        c.cornerVals[i] = val;
+        
+        if (val >=1) {
           c.boolVals[i]=true;
- 
+
           color colorBlend = summationFuncColor(p);
           totalRed += red(colorBlend);
           totalGreen += green(colorBlend);
           totalBlue += blue(colorBlend);
-          
+
           //stroke(summationFuncColor(p));
           //point(p.x, p.y);
         } else {
@@ -53,8 +56,8 @@ class Grid {
       //totalRed = totalRed==0 ? 255*4: totalRed;
       //totalGreen = totalGreen==0 ? 255*4: totalGreen;
       //totalBlue = totalBlue==0 ? 255*4: totalBlue;
-      
-      c.display(color(totalRed/4,totalGreen/4,totalBlue/4));
+
+      c.display(color(totalRed/4, totalGreen/4, totalBlue/4));
 
       //}
       //if (pointInCircles(c.center)) {
@@ -83,46 +86,46 @@ class Grid {
   }
   public boolean pointInCircles(PVector point) {
     /* Inequality expression from the article */
-    return summationFunc(point)>=1;
+    return summationFunc(point, ballList)>=1;
   }
 
-  float summationFunc(PVector point) {
-    /* 2D function from the article */
-    float output = 0;
-    for (Ball b : ballList) {
-      float numerator = pow(b.diameter/2, 2);
-      float denominator = pow((point.x-b.loc.x), 2)+pow((point.y-b.loc.y), 2);
-      output += numerator/denominator;
-    }
-    return output;
-  }
-  
-    public color summationFuncColor(PVector point) {
+
+  public color summationFuncColor(PVector point) {
     /* 2D function from the article */
     float weightTotal = 0;
-    
+
     float totalRed=0;
     float totalGreen=0;
     float totalBlue=0;
-    
+
     for (Ball b : ballList) {
       color someColor = b.hello;
       float numerator = pow(b.diameter/2, 2);
       float denominator = pow((point.x-b.loc.x), 2)+pow((point.y-b.loc.y), 2);
-      
+
       totalRed += red(someColor) * numerator/denominator;
       totalGreen += green(someColor) * numerator/denominator;
       totalBlue += blue(someColor) * numerator/denominator;
-      
+
       weightTotal += numerator/denominator;
     }
     totalRed *= 1/weightTotal;
     totalGreen *= 1/weightTotal;
     totalBlue *= 1/weightTotal;
-    
-    return color(totalRed,totalGreen,totalBlue);
+
+    return color(totalRed, totalGreen, totalBlue);
   }
-  void updateMidpoints(){
-    
+  void updateMidpoints() {
   }
+}
+
+float summationFunc(PVector point, ArrayList<Ball> ballList) {
+  /* 2D function from the article */
+  float output = 0;
+  for (Ball b : ballList) {
+    float numerator = pow(b.diameter/2, 2);
+    float denominator = pow((point.x-b.loc.x), 2)+pow((point.y-b.loc.y), 2);
+    output += numerator/denominator;
+  }
+  return output;
 }

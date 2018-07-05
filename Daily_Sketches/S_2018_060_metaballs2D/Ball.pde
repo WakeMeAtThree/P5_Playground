@@ -5,9 +5,9 @@ class Ball {
   Ball() {
     loc = new PVector(random(width), random(height));
     vel = new PVector(random(-1, 1), random(-1, 1)).mult(3);
-    diameter = random(25, 190);
+    diameter = random(60, 100);
     //hello = 
-    color[] colorOptions = {color(255,0,128),color(0,255,25),color(0,52,255)};
+    color[] colorOptions = {#0EC0E1, #DD3A7C,#DD3A7C};
     hello=colorOptions[floor(random(3))];
   }
   void run() {

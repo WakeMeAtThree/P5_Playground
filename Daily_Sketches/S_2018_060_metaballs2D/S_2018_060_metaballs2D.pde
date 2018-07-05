@@ -11,14 +11,14 @@ void setup() {
   size(400, 400, P3D);
   smooth(8);
   balls = new ArrayList<Ball>();
-  someGrid = new Grid(150,150, balls);
-  for (int i = 0; i < 5; i++) {
+  someGrid = new Grid(100,100, balls);
+  for (int i = 0; i < 15; i++) {
     balls.add(new Ball());
   }
 }
 
 void draw() {
-  background(255);
+  //background(255);
   someGrid.display();
   //someGrid.displayCorners();
   for (Ball b : balls) {

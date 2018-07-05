@@ -3,6 +3,7 @@ class Cell {
   PVector A, B, C, D;     //Cell's corners
   PVector AB, AC, CD, BD; //Cell's midpoints
   boolean[] boolVals = new boolean[4]; //Cell's corner containment booleans
+  float[] cornerVals = new float[4];
 
   Cell(float x, float y, float spaceX, float spaceY) {
     center = new PVector(x, y);
@@ -44,27 +45,41 @@ class Cell {
     case 0:
       break;
     case 1:
+      //cornerVals = {A, B, D, C};
+      AC.y = interpolateVertical(C, A);
+      CD.x = interpolateHorizontal(D, C);
       verts.add(CD);
       verts.add(C);
       verts.add(AC);
       break;
     case 2:
+      //cornerVals = {A, B, D, C};
+      BD.y = interpolateVertical(B, D);
+      CD.x = interpolateHorizontal(C, D);
       verts.add(BD);
       verts.add(D);
       verts.add(CD);
       break;
     case 3:
+      AC.y = interpolateVertical(A, C);
+      BD.y = interpolateVertical(B, D);
       verts.add(AC);
       verts.add(C);
       verts.add(D);
       verts.add(BD);
       break;
     case 4:
+      AB.x = interpolateHorizontal(A, B);
+      BD.y = interpolateVertical(B, D);
       verts.add(BD);
       verts.add(AB);
       verts.add(B);
       break;
     case 5:
+      AB.x=interpolateHorizontal(A, B);
+      BD.y=interpolateVertical(B, D);
+      CD.x=interpolateHorizontal(C, D);
+      AC.y=interpolateVertical(A, C);
       verts.add(C);
       verts.add(AC);
       verts.add(AB);
@@ -72,12 +87,16 @@ class Cell {
       verts.add(CD);
       break;
     case 6:
+      AB.x=interpolateHorizontal(A, B);
+      CD.x=interpolateHorizontal(C, D);
       verts.add(CD);
       verts.add(AB);
       verts.add(B);
       verts.add(D);
       break;
     case 7:
+      AB.x=interpolateHorizontal(A, B);
+      AC.y=interpolateVertical(A, C);
       verts.add(AB);
       verts.add(B);
       verts.add(D);
@@ -85,17 +104,25 @@ class Cell {
       verts.add(AC);
       break;
     case 8:
+    AB.x=interpolateHorizontal(A,B);
+    AC.y=interpolateVertical(A,C);
       verts.add(AC);
       verts.add(A);
       verts.add(AB);
       break;
     case 9:
+    AB.x=interpolateHorizontal(A,B);
+    CD.x=interpolateHorizontal(C,D);
       verts.add(A);
       verts.add(AB);
       verts.add(CD);
       verts.add(C);
       break;
     case 10:
+    AB.x=interpolateHorizontal(A,B);
+    BD.y=interpolateVertical(B,D);
+    CD.x=interpolateHorizontal(C,D);
+    AC.y=interpolateVertical(A,C);
       verts.add(A);
       verts.add(AB);
       verts.add(BD);
@@ -104,6 +131,8 @@ class Cell {
       verts.add(AC);
       break;
     case 11:
+    AB.x=interpolateHorizontal(A,B);
+    BD.y=interpolateVertical(B,D);
       verts.add(AB);
       verts.add(BD);
       verts.add(D);
@@ -111,12 +140,16 @@ class Cell {
       verts.add(A);
       break;
     case 12:
+    AC.y=interpolateVertical(A,C);
+    BD.y=interpolateVertical(B,D);
       verts.add(A);
       verts.add(B);
       verts.add(BD);
       verts.add(AC);
       break;
     case 13:
+    BD.y=interpolateVertical(B,D);
+    CD.x=interpolateHorizontal(C,D);
       verts.add(A);
       verts.add(B);
       verts.add(BD);
@@ -124,6 +157,8 @@ class Cell {
       verts.add(C);
       break;
     case 14:
+    AC.y=interpolateVertical(A,C);
+    CD.x=interpolateHorizontal(C,D);
       verts.add(A);
       verts.add(B);
       verts.add(D);
@@ -131,6 +166,7 @@ class Cell {
       verts.add(AC);
       break;
     case 15:
+    
       verts.add(A);
       verts.add(B);
       verts.add(D);
@@ -149,6 +185,27 @@ class Cell {
     endShape(CLOSE);
     popStyle();
   }
-  
 
+  float interpolateVertical(PVector B, PVector D) {
+    return B.y+(D.y-B.y)*(1-func(B))/(func(D)-func(B));
+  }
+  float interpolateHorizontal(PVector C, PVector D) {
+    return C.x+(D.x-C.x)*(1-func(C))/(func(D)-func(C));
+  }
+  float func(PVector V) {
+    //cornerVals = {A, B, D, C};
+    if (V == A) {
+      return cornerVals[0];
+    }
+    if (V == B) {
+      return cornerVals[1];
+    }
+    if (V == C) {
+      return cornerVals[3];
+    }
+    if (V == D) {
+      return cornerVals[2];
+    }
+    return 0.0;
+  }
 }
