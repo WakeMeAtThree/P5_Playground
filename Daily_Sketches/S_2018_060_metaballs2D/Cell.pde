@@ -20,12 +20,12 @@ class Cell {
     BD = center.copy().add(new PVector(spaceX/2, 0));
   }
 
-  PVector[] getCorners() {
+  public PVector[] getCorners() {
     PVector[] output = {A, B, D, C};
     return output;
   }
 
-  int getKey() {
+  public int getKey() {
     //int[] values = {0b1000, 0b0100, 0b0010, 0b0001};
     int[] values = {8, 4, 2, 1};
     int output = 0;
@@ -37,7 +37,7 @@ class Cell {
     return output;
   }
 
-  void display() {
+  public void display() {
     ArrayList<PVector> verts  = new ArrayList<PVector>();
 
     switch(getKey()) {

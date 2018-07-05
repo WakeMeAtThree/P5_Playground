@@ -10,7 +10,7 @@ Grid someGrid;
 void setup() {
   size(400, 400);
   balls = new ArrayList<Ball>();
-  someGrid = new Grid(55,55, balls);
+  someGrid = new Grid(10,10, balls);
   for (int i = 0; i < 10; i++) {
     balls.add(new Ball());
   }

@@ -1,3 +1,4 @@
+
 class Grid {
   int x, y;
   float spaceX, spaceY;
@@ -10,8 +11,8 @@ class Grid {
   Grid(int x, int y, ArrayList<Ball> ballList) {
     this.x = x;
     this.y = y;
-    this.spaceX = 1.0*width/x;
-    this.spaceY = 1.0*height/y;
+    this.spaceX = 1.0f*width/x;
+    this.spaceY = 1.0f*height/y;
 
     cells = new ArrayList<Cell>();
     for (int i = 0; i < x; i++) {
@@ -23,7 +24,7 @@ class Grid {
     this.ballList = ballList;
   }
 
-  void display() {
+  public void display() {
     pushStyle();
 
     rectMode(CENTER);
@@ -35,12 +36,12 @@ class Grid {
           c.boolVals[i]=true;
           strokeWeight(5);
           stroke(0, 255, 0);
-          //point(p.x, p.y);
+          point(p.x, p.y);
         } else {
           c.boolVals[i]=false;
         }
       }
-    c.display();
+    //c.display();
 
       //}
       //if (pointInCircles(c.center)) {
@@ -53,12 +54,12 @@ class Grid {
       //}
       strokeWeight(2);
       stroke(128);
-      //point(c.center.x, c.center.y);
+      point(c.center.x, c.center.y);
     }
     popStyle();
   }
 
-  void displayCorners() {
+  public void displayCorners() {
     for (Cell c : cells) {
       strokeWeight(2);
       point(c.A.x, c.A.y);
@@ -67,12 +68,12 @@ class Grid {
       point(c.D.x, c.D.y);
     }
   }
-  boolean pointInCircles(PVector point) {
+  public boolean pointInCircles(PVector point) {
     /* Inequality expression from the article */
     return summationFunc(point)>=1;
   }
 
-  float summationFunc(PVector point) {
+  public float summationFunc(PVector point) {
     /* 2D function from the article */
     float output = 0;
     for (Ball b : ballList) {
