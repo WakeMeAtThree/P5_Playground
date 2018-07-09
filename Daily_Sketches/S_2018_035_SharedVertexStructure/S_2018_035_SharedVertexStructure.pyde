@@ -33,7 +33,7 @@ def draw():
     background(0)
     
     #Morph
-    blendMesh.vertices = [PVector.lerp(j[0],j[1],map(cs(0.5*a+1.0*i/len(init.vertices)),-1,1,0,1)) for i,j in enumerate(zip(init.vertices,target.vertices))]
+    blendMesh.vertices = [PVector.lerp(j[0],j[1],map(cs(a+1.0*i/len(init.vertices)),-1,1,0,1)) for i,j in enumerate(zip(init.vertices,target.vertices))]
     
     #Setting up coordinate system
     translate(width/2, height/2, 0);
@@ -41,11 +41,15 @@ def draw():
     scale(2.5);
     
     #Display
-    fill(lerpColor(color(0x0CFFD2), color(0xD60043), map(cs(a), -1, 1, 0, 1)))
+    for i in range(len(init.vertices)):
+        param = 1.0*i/len(init.vertices)
+        fill(lerpColor(color(12,255,210), color(214,0,67), map(cs(a+param), -1, 1, 0, 1)))
     blendMesh.display()
     
     #Animate 
-    a += 0.05;
+    a += 0.03;
+    if(a > TWO_PI): exit()
+    #saveFrame("output/animation###.png")
 
 def ease(p): return 3*p*p - 2*p*p*p;
 def ease(p, g): return [1 - 0.5 * pow(2*(1 - p), g),0.5 * pow(2*p, g)][p < 0.5]

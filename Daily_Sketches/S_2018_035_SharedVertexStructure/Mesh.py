@@ -21,7 +21,7 @@ class Mesh():
                 self.faces[i].append(self.vertices.index(objShape.getChild(i).getVertex(j)))
                 
     def display(self):
-        fill(255, 0, 127, 255)
+        #fill(255, 0, 127, 255)
         stroke(0)
         strokeWeight(0.1)
         
