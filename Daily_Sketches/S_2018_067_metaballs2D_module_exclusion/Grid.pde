@@ -24,7 +24,7 @@ class Grid {
     this.ballList = ballList;
   }
 
-  public void display() {
+  public void display(color someColor) {
     pushStyle();
 
     rectMode(CENTER);
@@ -57,7 +57,7 @@ class Grid {
       //totalGreen = totalGreen==0 ? 255*4: totalGreen;
       //totalBlue = totalBlue==0 ? 255*4: totalBlue;
 
-      c.display(color(0,0,0));
+      c.display(someColor);
 
       //}
       //if (pointInCircles(c.center)) {

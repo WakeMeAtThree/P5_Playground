@@ -22,7 +22,7 @@ class Ball {
   }
   void update(float param) {
     //loc.add(vel);
-    loc=PVector.lerp(start,end,map(cs(a*param),-1,1,0,1));
+    loc=PVector.lerp(start,end,map(cs(a+param),-1,1,0,1));
     //println(hello.y);
   }
 
