@@ -20,14 +20,17 @@ class Mesh():
                 # j is looping through all 4 vertices
                 self.faces[i].append(self.vertices.index(objShape.getChild(i).getVertex(j)))
                 
-    def display(self):
+    def display(self,a):
         #fill(255, 0, 127, 255)
         stroke(0)
-        strokeWeight(0.1)
-        
-        beginShape(QUADS)
-
-        
+        #strokeWeight(0.1)
+        # for index,i in enumerate(self.vertices):
+        #     param = 1.0*index/len(self.vertices)
+        #     strokeWeight(lerp(1,2,map(cs(a+param),-1,1,0,1)))
+        #     point(i.x,i.y,i.z)
+        #noStroke()
+        fill(255)
+        beginShape()
         for key, value in self.faces.items():
             for i in value:
                 vec = self.vertices[i]
