@@ -53,12 +53,12 @@ void draw() {
   int[] yRange = {-6, 6};
   float ySpacing = 64;
   grid("HEX", xRange, yRange, xSpacing, ySpacing);
-  globalMult = 0.15;
+  globalMult = 1.15;
 
   //Animate
   //if (a>=TWO_PI) exit();
   //saveFrame("output/animation###.png");
-  a += 0.043;
+  a += 0.013;
 }
 
 void module(float a) {
