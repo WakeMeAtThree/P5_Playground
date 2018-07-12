@@ -1,9 +1,4 @@
 # Tools and Snippets
-### Alternative coordinate systems:
-- [Spherical Coordinates](https://en.wikipedia.org/wiki/Spherical_coordinate_system)
-- [Cylindrical Coordinates](https://en.wikipedia.org/wiki/Cylindrical_coordinate_system)
-- [Interpolation Methods](http://paulbourke.net/miscellaneous/interpolation/), [Another article](http://sol.gfxile.net/interpolation/)
-
 ### Workflow goes as follows:
 Module => Tiles => Delay/offset => Render
 
