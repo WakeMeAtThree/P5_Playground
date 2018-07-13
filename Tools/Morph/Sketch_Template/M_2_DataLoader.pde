@@ -21,7 +21,7 @@ class DataLoader {
       for (int i = 1; i < states+1; i++) {
         ArrayList<Curve> curveImports = new ArrayList<Curve>();
         for (int j = 1; j < parts+1; j++) {
-          curveImports.add(new Curve(loadShape(i+""+j+".svg"), false, options[(int)(i-1)%3]));
+          curveImports.add(new Curve(loadShape(i+""+j+".csv"), false, options[(int)(i-1)%3]));
         }
         curveStates.add(curveImports);
       }

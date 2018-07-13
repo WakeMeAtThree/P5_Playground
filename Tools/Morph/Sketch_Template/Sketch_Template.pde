@@ -6,10 +6,9 @@
  others can benefit from it as well.
  
  TO DO:
+ - DataLoader CSV files instead of SVG files
  - Fix numbering to start with 0 for
  keyFrames order and parts
- - radial delay/grid delay funcs
- - Combine all your interpolation methods
  - Start using glsl
  */
 
@@ -36,7 +35,6 @@ void setup() {
   noStroke();
   smooth(8);
   ortho();
-
 }
 
 void draw() {
@@ -44,16 +42,8 @@ void draw() {
   translate(width/2, height/2);
   light();
 
-  //module(a); //Viewing a single module
-
-  //Grid parameters setup
-  int[] xRange = {-6, 6};
-  float xSpacing = 91;
-  println(mouseX,mouseY);
-  int[] yRange = {-6, 6};
-  float ySpacing = 64;
-  grid("HEX", xRange, yRange, xSpacing, ySpacing);
-  globalMult = 1.15;
+  module(a); //Viewing a single module
+  //pattern();  
 
   //Animate
   //if (a>=TWO_PI) exit();
@@ -68,15 +58,24 @@ void module(float a) {
   //shearing take place here
 
   rotateX(PI-PI/4);
-  rotateZ(lerp(0,PI,map(cs(a),-1,1,0,1)));
-  rotateY(lerp(PI/4,-PI/4,map(cs(a),-1,1,0,1)));
+  rotateZ(lerp(0, PI, map(cs(a), -1, 1, 0, 1)));
+  rotateY(lerp(PI/4, -PI/4, map(cs(a), -1, 1, 0, 1)));
 
   for (Morph due : data) {
     due.display(a);
   }
   popMatrix();
 }
-
+void pattern() {
+  //Grid parameters setup
+  int[] xRange = {-6, 6};
+  float xSpacing = 91;
+  println(mouseX, mouseY);
+  int[] yRange = {-6, 6};
+  float ySpacing = 64;
+  grid("HEX", xRange, yRange, xSpacing, ySpacing);
+  globalMult = 1.15;
+}
 void grid(String type, int[] x, int[] y, float xSpace, float ySpace) {
   int totalCount = x[0]+x[1]+y[0]+y[1]+1;
   if (type == "RECT") {

@@ -26,6 +26,18 @@ class Curve {
     this.closeState = closeState;
     this.curveColor = curveColor;
   }
+  /* Constructor that takes table made from csvfile */
+
+  Curve(Table table, boolean closeState, color curveColor) {
+    //Add all vertices to arraylist
+    for (TableRow row : table.rows()) {
+      PVector point = new PVector(row.getFloat(0), row.getFloat(1), row.getFloat(2));
+      this.vertices.add(point);
+    }
+    //Closed curve boolean
+    this.closeState = false;
+    this.curveColor = curveColor;
+  }
 
   void display() {
     fill(curveColor);
