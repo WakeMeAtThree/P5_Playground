@@ -5,6 +5,12 @@ class Cell {
   PVector AB, AC, CD, BD;              //Cell's midpoints
   boolean[] boolVals = new boolean[4]; //Cell's corner containment booleans (if it's inside a ball)
   float[] cornerVals = new float[4];   //Values of sum for each corner
+
+  float[] cornerReds = new float[4];
+  float[] cornerGreens = new float[4];
+  float[] cornerBlues = new float[4];
+  PVector[] cornerColors = new PVector[4];
+
   float red, green, blue;              //Sum of RGB values for entire cell
 
   Cell(float x, float y, float spaceX, float spaceY) {
@@ -23,11 +29,43 @@ class Cell {
     AC = center.copy().add(new PVector(-spaceX/2, 0, 0));
     BD = center.copy().add(new PVector(spaceX/2, 0, 0));
   }
+  PVector getColor(PVector V) {
+    //cornerVals = {C, D, B, A};
+    if (V == C) {
+      return cornerColors[0];
+    }
+    if (V == D) {
+      return cornerColors[1];
+    }
+    if (V == B) {
+      return cornerColors[2];
+    }
+    if (V == A) {
+      return cornerColors[3];
+    }
+    return new PVector(0, 0, 0);
+  }
+  PVector getMidColor(PVector V) {
+    if (V == AB) {
+      return interpolateColors(A, B);
+    }
+    if (V == AC) {
+      return interpolateColors(A, C);
+    }
+    if (V == CD) {
+      return interpolateColors(C, D);
+    }
+    if (V == BD) {
+      return interpolateColors(B, D);
+    }
+    return new PVector(0, 0, 0);
+  }
+
   PVector[] getCorners() {
     PVector[] output = {C, D, B, A};
     return output;
   }
-  void addColors(ArrayList<Float> input, ArrayList<Ball> ballList) {
+  void addColors(ArrayList<Float> input, ArrayList<Ball> ballList, int index) {
     /*
     1. Reset r,g,b to zero every time
      2. Normalize weights
@@ -37,22 +75,40 @@ class Cell {
      5. Divide it by the sum of the normalized weights
      */
 
-    this.red = 0;
-    this.green = 0;
-    this.blue = 0;
+    //this.red = 0;
+    //this.green = 0;
+    //this.blue = 0;
+    //ArrayList<Float> normalizedStepVals = getNormalized(input);
+    //float sumWeights = 0;
+
+    //for (int i = 0; i < ballList.size(); i++) {
+    //  color ballColor = ballList.get(i).ballColor;
+    //  this.red += red(ballColor)*normalizedStepVals.get(i);
+    //  this.green += green(ballColor)*normalizedStepVals.get(i);
+    //  this.blue += blue(ballColor)*normalizedStepVals.get(i);
+    //  sumWeights +=normalizedStepVals.get(i);
+    //}
+    //this.red *= 1/sumWeights;
+    //this.green *= 1/sumWeights;
+    //this.blue *= 1/sumWeights;
+    cornerReds[index] = 0;
+    cornerGreens[index] = 0;
+    cornerBlues[index] = 0;
     ArrayList<Float> normalizedStepVals = getNormalized(input);
     float sumWeights = 0;
 
     for (int i = 0; i < ballList.size(); i++) {
       color ballColor = ballList.get(i).ballColor;
-      this.red += red(ballColor)*normalizedStepVals.get(i);
-      this.green += green(ballColor)*normalizedStepVals.get(i);
-      this.blue += blue(ballColor)*normalizedStepVals.get(i);
+      cornerReds[index] += red(ballColor)*normalizedStepVals.get(i);
+      cornerGreens[index] += green(ballColor)*normalizedStepVals.get(i);
+      cornerBlues[index] += blue(ballColor)*normalizedStepVals.get(i);
       sumWeights +=normalizedStepVals.get(i);
     }
-    this.red *= 1/sumWeights;
-    this.green *= 1/sumWeights;
-    this.blue *= 1/sumWeights;
+    cornerReds[index] *= 1/sumWeights;
+    cornerGreens[index] *= 1/sumWeights;
+    cornerBlues[index] *= 1/sumWeights;
+
+    cornerColors[index] = new PVector(cornerReds[index], cornerGreens[index], cornerBlues[index]);
   }
 
   int getKey() {
@@ -70,151 +126,197 @@ class Cell {
     return output;
   }
 
+  void interp() {
+    AB = interpolate(A, B);
+    AC = interpolate(A, C);
+    CD = interpolate(C, D);
+    BD = interpolate(B, D);
+  }
   void display() {
     /* Finds out what case does a cell correspond to, then a
      final interpolation to smooth result from the 90 and 45 degree angles,
      then adds corresponding vertices to display list */
 
     ArrayList<PVector> verts  = new ArrayList<PVector>();
+    ArrayList<PVector> vertColors = new ArrayList<PVector>(); 
+
+    interp();
 
     switch(getKey()) {
     case 0:
       break;
     case 1:
-      AC = interpolate(A, C);
-      CD = interpolate(C, D);
       verts.add(CD);
       verts.add(C);
       verts.add(AC);
+
+      vertColors.add(getMidColor(CD));
+      vertColors.add(getColor(C));
+      vertColors.add(getMidColor(AC));
       break;
     case 2:
-      BD = interpolate(B, D);
-      CD = interpolate(C, D);
       verts.add(BD);
       verts.add(D);
       verts.add(CD);
+
+      vertColors.add(getMidColor(BD));
+      vertColors.add(getColor(D));
+      vertColors.add(getMidColor(CD));
       break;
     case 3:
-      AC = interpolate(A, C);
-      BD = interpolate(B, D);
-
       verts.add(AC);
       verts.add(C);
       verts.add(D);
       verts.add(BD);
+
+      vertColors.add(getMidColor(AC));
+      vertColors.add(getColor(C));
+      vertColors.add(getColor(D));
+      vertColors.add(getMidColor(BD));
       break;
     case 4:
-      AB = interpolate(A, B);
-      BD = interpolate(B, D);
       verts.add(BD);
       verts.add(AB);
       verts.add(B);
+
+      vertColors.add(getMidColor(BD));    
+      vertColors.add(getMidColor(AB));
+      vertColors.add(getColor(B));
       break;
     case 5:
-      AB = interpolate(A, B);
-      BD = interpolate(B, D);
-      CD = interpolate(C, D);
-      AC = interpolate(A, C);
       verts.add(C);
       verts.add(AC);
       verts.add(AB);
       verts.add(BD);
       verts.add(CD);
+
+      vertColors.add(getColor(C));
+      vertColors.add(getMidColor(AC));    
+      vertColors.add(getMidColor(AB));
+      vertColors.add(getMidColor(BD));    
+      vertColors.add(getMidColor(CD));
       break;
     case 6:
-      AB = interpolate(A, B);
-      CD = interpolate(C, D);
       verts.add(CD);
       verts.add(AB);
       verts.add(B);
       verts.add(D);
+      vertColors.add(getMidColor(CD));
+      vertColors.add(getMidColor(AB));
+      vertColors.add(getColor(B));
+      vertColors.add(getColor(D));
       break;
     case 7:
-      AB = interpolate(A, B);
-      AC = interpolate(A, C);
       verts.add(AB);
       verts.add(B);
       verts.add(D);
       verts.add(C);
       verts.add(AC);
+      vertColors.add(getMidColor(AB));
+      vertColors.add(getColor(B));
+      vertColors.add(getColor(D));
+      vertColors.add(getColor(C));
+      vertColors.add(getMidColor(AC));
       break;
     case 8:
-      AB = interpolate(A, B);
-      AC = interpolate(A, C);
       verts.add(AC);
       verts.add(A);
       verts.add(AB);
+      vertColors.add(getMidColor(AC));
+      vertColors.add(getColor(A));
+      vertColors.add(getMidColor(AB));
       break;
     case 9:
-      AB = interpolate(A, B);
-      CD = interpolate(C, D);
       verts.add(A);
       verts.add(AB);
       verts.add(CD);
       verts.add(C);
+      vertColors.add(getColor(A));
+      vertColors.add(getMidColor(AB));
+      vertColors.add(getMidColor(CD));
+      vertColors.add(getColor(C));
       break;
     case 10:
-      AB = interpolate(A, B);
-      BD = interpolate(B, D);
-      CD = interpolate(C, D);
-      AC = interpolate(A, C);
       verts.add(A);
       verts.add(AB);
       verts.add(BD);
       verts.add(D);
       verts.add(CD);
       verts.add(AC);
+      vertColors.add(getColor(A));
+      vertColors.add(getMidColor(AB));
+      vertColors.add(getMidColor(BD));
+      vertColors.add(getColor(D));
+      vertColors.add(getMidColor(CD));
+      vertColors.add(getMidColor(AC));
       break;
     case 11:
-      AB = interpolate(A, B);
-      BD = interpolate(B, D);
       verts.add(AB);
       verts.add(BD);
       verts.add(D);
       verts.add(C);
       verts.add(A);
+
+      vertColors.add(getMidColor(AB));
+      vertColors.add(getMidColor(BD));
+      vertColors.add(getColor(D));
+      vertColors.add(getColor(C));
+      vertColors.add(getColor(A));
       break;
     case 12:
-      AC = interpolate(A, C);
-      BD = interpolate(B, D);
       verts.add(A);
       verts.add(B);
       verts.add(BD);
       verts.add(AC);
+      vertColors.add(getColor(A));
+      vertColors.add(getColor(B));
+      vertColors.add(getMidColor(BD));
+      vertColors.add(getMidColor(AC));
       break;
     case 13:
-      BD = interpolate(B, D);
-      CD = interpolate(C, D);
       verts.add(A);
       verts.add(B);
       verts.add(BD);
       verts.add(CD);
       verts.add(C);
+      vertColors.add(getColor(A));
+      vertColors.add(getColor(B));
+      vertColors.add(getMidColor(BD));
+      vertColors.add(getMidColor(CD));
+      vertColors.add(getColor(C));
       break;
     case 14:
-      AC = interpolate(A, C);
-      CD = interpolate(C, D);
       verts.add(A);
       verts.add(B);
       verts.add(D);
       verts.add(CD);
       verts.add(AC);
+      vertColors.add(getColor(A));
+      vertColors.add(getColor(B));
+      vertColors.add(getColor(D));
+      vertColors.add(getMidColor(CD));
+      vertColors.add(getMidColor(AC));
+
       break;
     case 15:
       verts.add(A);
       verts.add(B);
       verts.add(D);
       verts.add(C);
+      vertColors.add(getColor(A));
+      vertColors.add(getColor(B));
+      vertColors.add(getColor(D));
+      vertColors.add(getColor(C));
       break;
     }
 
     pushStyle();
     noStroke();
-    fill(this.red, this.green, this.blue);
-
-    //stroke(this.red, this.green, this.blue);
     beginShape();
-    for (PVector p : verts) {
+    for (int i = 0; i < verts.size(); i++) {
+      PVector p = verts.get(i);
+      PVector pColor = vertColors.get(i);
+      fill(pColor.x, pColor.y, pColor.z);
       vertex(p.x, p.y);
     }
     endShape(CLOSE);
@@ -226,6 +328,14 @@ class Cell {
      points by the factor of (1-f(a))/(f(b)-f(a)) 
      because f(b) needs to be ~one */
     return PVector.lerp(A, B, (1-func(A))/(func(B)-func(A)));
+  }
+
+  PVector interpolateColors(PVector A, PVector B) {
+    /* interpolates between two input (corner)
+     points by the factor of (1-f(a))/(f(b)-f(a)) 
+     because f(b) needs to be ~one */
+
+    return PVector.lerp(getColor(A), getColor(B), (1-func(A))/(func(B)-func(A)));
   }
 
   float func(PVector V) {

@@ -35,7 +35,7 @@ class Grid {
         ArrayList<Float> values = sum(p, ballList);
 
         //Feed list pre-summed values for each corner to the cell 
-        c.addColors(values, ballList);
+        c.addColors(values, ballList, i);
 
         //Sum up the values
         float sum = 0;

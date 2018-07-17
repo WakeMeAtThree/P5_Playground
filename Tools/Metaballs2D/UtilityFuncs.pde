@@ -4,8 +4,7 @@ ArrayList<Float> applyFunc(ArrayList<Float> input) {
 
   ArrayList<Float> output = new ArrayList<Float>();
   for (int i = 0; i < input.size(); i++) {
-    //Option 1
-    output.add((input).get(i));
+    output.add((input).get(i)); // yourFunc(input).get(i) for instance
   }
   return output;
 }

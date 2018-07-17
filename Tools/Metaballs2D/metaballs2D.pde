@@ -1,9 +1,10 @@
-
 /*
-Implementation of metaballs and marching squares algorithm using
- the wonderful article written by Jamie Wong as a reference:
- http://jamie-wong.com/2014/08/19/metaballs-and-marching-squares/
- */
+Hello! I made this implementation of metaballs and marching squares algorithm
+using the wonderful article written by Jamie Wong as a reference:
+http://jamie-wong.com/2014/08/19/metaballs-and-marching-squares/
+
+I'm setting this up to be extended to 3Dimensions, and hopefully to a glsl shader.
+*/
 
 ArrayList<Ball> balls;
 Grid grid2D;
@@ -16,10 +17,10 @@ void setup() {
 
   //Instantiate ball list and 2Dgrid
   balls = new ArrayList<Ball>();
-  grid2D = new Grid(10, 10, balls);
+  grid2D = new Grid(55, 55, balls);
 
   //Add balls to ball list
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < 5; i++) {
     balls.add(new Ball());
   }
 }
