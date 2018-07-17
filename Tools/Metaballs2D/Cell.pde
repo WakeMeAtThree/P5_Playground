@@ -1,6 +1,7 @@
 class Cell {
   PVector center;                      //Cell's centerpoint
   PVector A, B, C, D;                  //Cell's corners
+  PVector E, F, G, H;                  //Extension to 3D corners
   PVector AB, AC, CD, BD;              //Cell's midpoints
   boolean[] boolVals = new boolean[4]; //Cell's corner containment booleans (if it's inside a ball)
   float[] cornerVals = new float[4];   //Values of sum for each corner
@@ -23,7 +24,7 @@ class Cell {
     BD = center.copy().add(new PVector(spaceX/2, 0, 0));
   }
   PVector[] getCorners() {
-    PVector[] output = {A, B, D, C};
+    PVector[] output = {C, D, B, A};
     return output;
   }
   void addColors(ArrayList<Float> input, ArrayList<Ball> ballList) {
@@ -59,7 +60,7 @@ class Cell {
      for look up table for marching squares */
 
     //int[] values = {0b1000, 0b0100, 0b0010, 0b0001};
-    int[] values = {8, 4, 2, 1};
+    int[] values = {1, 2, 4, 8};
     int output = 0;
 
     for (int i = 0; i < boolVals.length; i++) {
@@ -80,39 +81,40 @@ class Cell {
     case 0:
       break;
     case 1:
-      AC.y = interpolateVertical(C, A);
-      CD.x = interpolateHorizontal(D, C);
+      AC = interpolate(A, C);
+      CD = interpolate(C, D);
       verts.add(CD);
       verts.add(C);
       verts.add(AC);
       break;
     case 2:
-      BD.y = interpolateVertical(B, D);
-      CD.x = interpolateHorizontal(C, D);
+      BD = interpolate(B, D);
+      CD = interpolate(C, D);
       verts.add(BD);
       verts.add(D);
       verts.add(CD);
       break;
     case 3:
-      AC.y = interpolateVertical(A, C);
-      BD.y = interpolateVertical(B, D);
+      AC = interpolate(A, C);
+      BD = interpolate(B, D);
+
       verts.add(AC);
       verts.add(C);
       verts.add(D);
       verts.add(BD);
       break;
     case 4:
-      AB.x = interpolateHorizontal(A, B);
-      BD.y = interpolateVertical(B, D);
+      AB = interpolate(A, B);
+      BD = interpolate(B, D);
       verts.add(BD);
       verts.add(AB);
       verts.add(B);
       break;
     case 5:
-      AB.x=interpolateHorizontal(A, B);
-      BD.y=interpolateVertical(B, D);
-      CD.x=interpolateHorizontal(C, D);
-      AC.y=interpolateVertical(A, C);
+      AB = interpolate(A, B);
+      BD = interpolate(B, D);
+      CD = interpolate(C, D);
+      AC = interpolate(A, C);
       verts.add(C);
       verts.add(AC);
       verts.add(AB);
@@ -120,16 +122,16 @@ class Cell {
       verts.add(CD);
       break;
     case 6:
-      AB.x=interpolateHorizontal(A, B);
-      CD.x=interpolateHorizontal(C, D);
+      AB = interpolate(A, B);
+      CD = interpolate(C, D);
       verts.add(CD);
       verts.add(AB);
       verts.add(B);
       verts.add(D);
       break;
     case 7:
-      AB.x=interpolateHorizontal(A, B);
-      AC.y=interpolateVertical(A, C);
+      AB = interpolate(A, B);
+      AC = interpolate(A, C);
       verts.add(AB);
       verts.add(B);
       verts.add(D);
@@ -137,25 +139,25 @@ class Cell {
       verts.add(AC);
       break;
     case 8:
-      AB.x=interpolateHorizontal(A, B);
-      AC.y=interpolateVertical(A, C);
+      AB = interpolate(A, B);
+      AC = interpolate(A, C);
       verts.add(AC);
       verts.add(A);
       verts.add(AB);
       break;
     case 9:
-      AB.x=interpolateHorizontal(A, B);
-      CD.x=interpolateHorizontal(C, D);
+      AB = interpolate(A, B);
+      CD = interpolate(C, D);
       verts.add(A);
       verts.add(AB);
       verts.add(CD);
       verts.add(C);
       break;
     case 10:
-      AB.x=interpolateHorizontal(A, B);
-      BD.y=interpolateVertical(B, D);
-      CD.x=interpolateHorizontal(C, D);
-      AC.y=interpolateVertical(A, C);
+      AB = interpolate(A, B);
+      BD = interpolate(B, D);
+      CD = interpolate(C, D);
+      AC = interpolate(A, C);
       verts.add(A);
       verts.add(AB);
       verts.add(BD);
@@ -164,8 +166,8 @@ class Cell {
       verts.add(AC);
       break;
     case 11:
-      AB.x=interpolateHorizontal(A, B);
-      BD.y=interpolateVertical(B, D);
+      AB = interpolate(A, B);
+      BD = interpolate(B, D);
       verts.add(AB);
       verts.add(BD);
       verts.add(D);
@@ -173,16 +175,16 @@ class Cell {
       verts.add(A);
       break;
     case 12:
-      AC.y=interpolateVertical(A, C);
-      BD.y=interpolateVertical(B, D);
+      AC = interpolate(A, C);
+      BD = interpolate(B, D);
       verts.add(A);
       verts.add(B);
       verts.add(BD);
       verts.add(AC);
       break;
     case 13:
-      BD.y=interpolateVertical(B, D);
-      CD.x=interpolateHorizontal(C, D);
+      BD = interpolate(B, D);
+      CD = interpolate(C, D);
       verts.add(A);
       verts.add(B);
       verts.add(BD);
@@ -190,8 +192,8 @@ class Cell {
       verts.add(C);
       break;
     case 14:
-      AC.y=interpolateVertical(A, C);
-      CD.x=interpolateHorizontal(C, D);
+      AC = interpolate(A, C);
+      CD = interpolate(C, D);
       verts.add(A);
       verts.add(B);
       verts.add(D);
@@ -199,7 +201,6 @@ class Cell {
       verts.add(AC);
       break;
     case 15:
-
       verts.add(A);
       verts.add(B);
       verts.add(D);
@@ -220,29 +221,30 @@ class Cell {
     popStyle();
   }
 
-  float interpolateVertical(PVector B, PVector D) {
-    return B.y+(D.y-B.y)*(1-func(B))/(func(D)-func(B));
+  PVector interpolate(PVector A, PVector B) {
+    /* interpolates between two input (corner)
+     points by the factor of (1-f(a))/(f(b)-f(a)) 
+     because f(b) needs to be ~one */
+    return PVector.lerp(A, B, (1-func(A))/(func(B)-func(A)));
   }
-  float interpolateHorizontal(PVector C, PVector D) {
-    return C.x+(D.x-C.x)*(1-func(C))/(func(D)-func(C));
-  }
+
   float func(PVector V) {
     /* Takes in one of the corner vectors {A,B,C,D}
      and returns their corresponding corner value (sum of 
      ball list contribution) */
 
-    //cornerVals = {A, B, D, C};
-    if (V == A) {
+    //cornerVals = {C, D, B, A};
+    if (V == C) {
       return cornerVals[0];
     }
-    if (V == B) {
+    if (V == D) {
       return cornerVals[1];
     }
-    if (V == C) {
-      return cornerVals[3];
-    }
-    if (V == D) {
+    if (V == B) {
       return cornerVals[2];
+    }
+    if (V == A) {
+      return cornerVals[3];
     }
     return 0.0;
   }
