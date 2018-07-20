@@ -5,7 +5,7 @@ def setup():
     counts = {i:0 for i in modules}
     
     newList = []
-    biases = [1,1,1,1,1,1,1]
+    biases = [1,1,5,2,1,2,1]
     
     for i,j in zip(modules,biases):
         newList+=[i]*j
@@ -25,11 +25,4 @@ def shuffle(alist):
     for i,letter in enumerate(jumble):
         r = int(random(i))
         jumble[i],jumble[r] = jumble[r],jumble[i]
-    return jumble
-def shuffle2(jumble):
-    for i in range(len(jumble)):
-        r = int(random(i))
-        temp = jumble[i]
-        jumble[i] = jumble[r]
-        jumble[r] = temp
     return jumble
