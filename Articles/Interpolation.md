@@ -9,6 +9,7 @@ WIP.
 ### References:
 - [Spherical Coordinates](https://en.wikipedia.org/wiki/Spherical_coordinate_system)
 - [Cylindrical Coordinates](https://en.wikipedia.org/wiki/Cylindrical_coordinate_system)
+- [Torroidal Coordinates](https://en.wikipedia.org/wiki/Toroidal_coordinates)
 - [Interpolation Methods](http://paulbourke.net/miscellaneous/interpolation/), [Another article](http://sol.gfxile.net/interpolation/)
 
 
