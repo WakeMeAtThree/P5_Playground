@@ -7,3 +7,4 @@ WIP
 - [ ] Interpolation techniques
 - [ ] Process workflow
 - [ ] Controlling noise flow field
+- [ ] Try/Except workflow
