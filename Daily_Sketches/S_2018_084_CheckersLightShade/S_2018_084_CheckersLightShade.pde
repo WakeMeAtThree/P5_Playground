@@ -19,25 +19,13 @@ a = map(360,0,width,0,TWO_PI);
 void draw() {
   background(lerpColor(#000000, #000000, 1-map(cs(a), -1, 1, 0, 1)));
   lights();
-  
   float dirY = (50 / float(height) - 0.5) * 2;
   float dirX = (105 / float(width) - 0.5) * 2;
   directionalLight(180, 180, 180, -dirX, -dirY, -1);
-  if (mousePressed)println(mouseX, mouseY);
-  //Morph
-  //blend.morph(initial, target, a);
   translate(width/2,height/2,0);
-  
   module(0, 0, a, scl/1.5);
-
-  //Animate
-  //a+=0.04;
-  //b+=0.01;
-  //Save Frames
   a+=0.04;
-  if(mousePressed) println(mouseX);
   if(a > TWO_PI+map(360,0,width,0,TWO_PI)) exit();
-  //saveFrame("output/animation###.png");
 }
 void module(float x, float y, float a, float scl) {
   pushMatrix();
@@ -48,21 +36,13 @@ void module(float x, float y, float a, float scl) {
   rotateX(PI-PI/4);
   rotateZ(lerp(0, PI, map(cs(a), -1, 1, 0, 1)));
   rotateY(lerp(PI/4, 0, 0.5*map(cs(a), -1, 1, 0, 1)+0.5*map(cs(a+1.5), -1, 1, 0, 1)   ));
-  if (mousePressed) println(mouseX);
   float sclx = lerp(10,37,0.001*map(cs(a), -1, 1, 0, 1)+0.999*map(cs(a+1.5), -1, 1, 0, 1));
-  //float scly = lerp(15,36,0.5*map(cs(a+1.5), -1, 1, 0, 1));
-  //scly = lerp(18,38,map(cs(a), -1, 1, 0, 1));
   scale(sclx,sclx,sclx);
-  
-  //Display
-  //blend.display(a);
   pizza.display(a);
   popMatrix();
 }
 
-void drawScene(PGraphics scene){
-  
-}
+
 // Needed to create my own ease functions instead
 
 // Set of ease functions below borrowed from Dave Whyte's sketches
