@@ -1,44 +1,53 @@
 def setup():
     global scene,a,c,objects,toon,maxAmount,toggle,X,Y,Z,boxSize
+    # Basic setup
     size(400,400,P3D)
     smooth(8)
-    scene = createGraphics(400,400,P3D)
     frameRate(7)
     ortho()
+    textMode(CENTER)
+    textAlign(LEFT,CENTER)
+    textSize(8)
+    
+    # Initializing
+    scene = createGraphics(400,400,P3D)
     toon = loadShader("ToonFrag.glsl", "ToonVert.glsl")
-    X = 3
-    Y = 3
-    Z = 3
-    toggle = True
+    
+    # Grid size
+    X = 2
+    Y = 2
+    Z = 2
+    
+    # Necessary values
     maxAmount = 2**(X*Y*Z) 
-    a = floor(random(maxAmount))
+    a = 0
     boxSize = 45
     objects = []
-    translate(width/2,height/2)
-    rotateX(PI/4)
-    rotateZ(PI/4)
-
+    
+    # Instantiate objects
     for i in range(X):
         for j in range(Y):
             for k in range(Z):
                 objects.append(Boxes(i*boxSize,j*boxSize,k*boxSize,boxSize))
-    textMode(CENTER)
-    textAlign(CENTER,CENTER)
-    textSize(12)
-    # c = [comb for i in range(len(objects)) for comb in combinations(objects, i + 1)]
+
 
 def draw():
     global a
     background(255)
+    
+    # Run and display the scene
     drawScene(scene,a)
     image(scene,0,0,width,height)
-    print(mouseY)
+
+    # Display text and combination code
     fill(0)
-    text(format(a, '#0{}b'.format(X*Y*Z+2)),width/2,height-10-47)
-    text('{}/{}'.format(a,2**(X*Y*Z)),width/2,height-25-47)
+    text(format(a, '#0{}b'.format(X*Y*Z+2)),20,height-16-47+38)
+    text('{}/{}'.format(a,2**(X*Y*Z)),20,height-25-47+38)
+    
+    #Animate
     a += 1
-    if(a > maxAmount): exit()
-    #saveFrame("3x3x2/animation###.png")
+    if(a >= maxAmount): exit()
+    #saveFrame("2x2x2_text/animation###.png")
 
 def keyPressed():
     if(key==' '): noLoop()
@@ -86,7 +95,7 @@ class Boxes(object):
         
         scene.translate(self.X,self.Y,self.Z)
         scene.noFill()
-        scene.stroke(0,20)
+        scene.stroke(0,10)
         scene.box(self.Size)
         
         scene.popStyle()
