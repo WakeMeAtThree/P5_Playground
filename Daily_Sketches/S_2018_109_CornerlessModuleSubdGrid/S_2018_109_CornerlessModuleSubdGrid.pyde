@@ -81,7 +81,7 @@ def draw():
     #image(scene,0,0,width/2,height/2)
     a += 0.0035
     if(a >= 1.0): exit()
-    saveFrame("output10/animation###.png")
+    #saveFrame("output10/animation###.png")
 def drawScene(someScene,a):
     someScene.beginDraw()
     someScene.ortho()
