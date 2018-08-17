@@ -1,6 +1,6 @@
 # Daily Sketches 2018
 
-This is a documentation of the multiple series you will find me working on most of the time. The organization presented here is for ease of accessibility, but it doesn't reflect how my process in reality works. You will find me working on a grid push series for some time, then move on to a morph sketch, then test an idea with metaballs, then back to grid push. I listen to my flow at the time of making a sketch, and if I found myself needing some relief from a particular idea, I would take a break from it and pursue other ideas. 
+This is a documentation of the multiple series you will find me working on nowadays. The organization presented here is for ease of accessibility, but it doesn't reflect how my process in reality works. You will find me working on a grid push series for some time, then move on to a morph sketch, then test an idea with metaballs, then back to grid push. I listen to my flow at the time of making a sketch, and if I found myself needing some relief from a particular idea, I would take a break from it and pursue other ideas. 
 
 ## Grid Push Series
 
