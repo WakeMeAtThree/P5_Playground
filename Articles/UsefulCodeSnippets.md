@@ -212,124 +212,22 @@ class Quadrant(object):
 ## Normalized Dynamic Grid 
 I gotta simplify this, but for now:
 ```python
-class Matrix(object):
-    def __init__(self, X, Y, chance):
-        #coloroptions = [color(225,0,0),color(225,128,0),color(0,50,230),color(255,255,255)]
-        self.X = X
-        self.Y = Y
-        self.WIDTH = 1100
-        self.HEIGHT = 1100
-        self.modules = data
+# 1D Grid
+def normalizeList(alist,multiply): return [1.0*multiply*i/sum(alist) for i in alist]
+def sumPrev(alist): return [0]+[sum(alist[:index+1]) for index,i in enumerate(alist)][:-1]
+
+# 2D Grid
+def getMatrix(X,Y,W=400,chance=None):
+    if(chance is None):
+        M = [[1 for j in range(X)] for i in range(Y)]
+        M = [normalizeList(i,W) for i in M]
         
-        self.biases = [0,1,3,1,2,2,1,1,2,0,1,1,1,1]
-        self.modules = bias(self.modules,self.biases)
-        self.modules = shuffle(self.modules)
-        self.choices = [[floor(random(len(self.modules))) for j in range(X)] for i in range(Y)]
-        
-        #Cancel a module given some chance threshold
-        self.canceled = [[1 if random(1)>=chance else 0 for j in range(X)] for i in range(Y)]
-        
-    def module(self,someShape,X,Y,W,H):
-        #DEFUNCT, USE DATA LOADER ABOVE
-        """This function is where you'll keep your module. Keep in mind that this is
-        considering the display in CORNER mode.
-        """
-        global Ushape
-        
-        if(W != 0):
-            shape(someShape,X,Y,W,H)
-            #shape(anotherShape,X,Y,W,H)
-            #shape(sides,X,Y,W,H)
-    def getMatrix(self):
-        """This is where Matrix is dynamically updated"""
-        #Choice of using sin and cos vs sin and cos
-        return [[0 if not self.canceled[i][j] else expression(a,i,j) for j in range(self.X)] for i in range(self.Y)]
-    def displayH(self):
-        """Equal spaced Y, dynamic X"""
-        Matrix = self.getMatrix()
-        Matrix = [normalizeList(i,width) for i in Matrix]
-        shiftY = 0
-        spaceY = 1.0*height/Y
-        param = [0,0]
-        for row in Matrix:
-            shiftX = 0
-            param[0] = 0
-            for i in row:
-                with pushMatrix():
-                    #scale(1,1,555*noise(scl*param[1]+cos(TWO_PI*a),scl*param[0]+sin(TWO_PI*a)))
-                    #self.module(shiftX,shiftY,i,spaceY)
-                    scale(1,1,255*noise(radius*cos(TWO_PI*a)+sum(param)))
-                    if(i > 0): self.module(self.modules[self.choices[param[1]][param[0]]],shiftX,shiftY,i,spaceY)
-                shiftX += i
-                param[0]+=1
-            shiftY += spaceY
-            param[1]+=1
-    def displayV(self):
-        """Equal spaced X, dynamic Y"""
-        Matrix = self.getMatrix()
-        Matrix = [normalizeList(i,width) for i in Matrix]
-        shiftX = 0
-        spaceX = 1.0*width/X
-        param = [0,0]
-        for row in Matrix:
-            shiftY = 0
-            param[0] = 0
-            for i in row:
-                with pushMatrix():
-                    #scale(1,1,555*noise(scl*param[0]+cos(TWO_PI*a),scl*param[1]+sin(TWO_PI*a)))
-                    scale(1,1,255*noise(radius*cos(TWO_PI*a)+sum(param)))
-                    if(i > 0): self.module(self.modules[self.choices[param[1]][param[0]]],shiftX,shiftY,spaceX,i)
-                shiftY += i
-                param[0]+=1
-            shiftX += spaceX
-            param[1]+=1
-    def displayU(self):
-        """Unequal spaced Y, dynamic X"""
-        Matrix = self.getMatrix()
-        Matrix = [normalizeList(i,self.WIDTH) for i in Matrix]
-        shiftY = 0
-        spaceY = [sin(TWO_PI*a+1.0*i/(1-Y)) for i in range(Y)]
-        spaceY = normalizeList(spaceY,self.HEIGHT)
-        param = [0,0]
-        stretch = False
-        for row in Matrix:
-            shiftX = 0
-            val = spaceY.pop(0)
-            param[0] = 0
-            for i in row:
-                with pushMatrix():
-                    scale(1,1,255*sin(TWO_PI*a+5.0*sum(param)/(X+Y-2)))
-                    #scale(1,1,555*noise(cos(TWO_PI*a)+sum(param)))
-                    if(not stretch): self.module(self.modules[self.choices[param[1]][param[0]]],shiftX,shiftY,i,val)
-                shiftX += i
-                param[0]+=1
-            shiftY += val
-            param[1]+=1
-    def display(self):
-        """Dynamic Y, dynamic X"""
-        Matrix = self.getMatrix()
-        Matrix = [normalizeList(i,width) for i in Matrix]
-        shiftY = 0
-        spaceY = [[noise(scl*i+cos(TWO_PI*a)+25334,scl*j+radius*sin(TWO_PI*a)+25334) for j in range(X)] for i in range(Y)]
-        spaceY = [normalizeList(row,height) for row in spaceY]
-        shiftY = [0 for i in range(X)]
-        param = [0,0]
-        for row in Matrix:
-            shiftX = 0
-            someValues = spaceY.pop(0)
-            
-            count = 0
-            param[0] = 0
-            for j,i in zip(shiftY,row):
-                val = someValues.pop(0)
-                with pushMatrix():
-                    scale(1,1,255*noise(radius*cos(TWO_PI*a)+sum(param)))
-                    self.module(self.modules[self.choices[param[1]][param[0]]],shiftX,j,i,i)                
-                shiftX += i
-                shiftY[count] += val
-                count+=1
-                param[0]+=1
-            param[1]+=1
+    else:
+        M = [[0 if random(1) > chance else 1 for j in range(X)] for i in range(Y)]
+        M = [normalizeList(i,W) for i in M]
+    return M
+def getPositions(M):
+    return [sumPrev(i) for i in M]
 ```
 
 ## GLSL stuff
