@@ -56,6 +56,7 @@ Table generators in markdown
 
 ## Loading csv points from Grasshopper
 
+```python
 def loadPoints(fname):
     with open(fname) as f:
         content = f.readlines()
@@ -77,24 +78,30 @@ def lerpLists(lists,amt):
                         amt)
 def lerpList(list1,list2,amt):
     return [PVector.lerp(i,j,amt) for i,j in zip(list1,list2)]
-
+```
 
 ## Eases
 
+```python
 def smoothstep(edge0, edge1, x):
     # Scale, bias and saturate x to 0..1 range
     x = constrain((x - edge0) / (edge1 - edge0), 0.0, 1.0)
     # Evaluate polynomial
     return x * x * (3 - 2 * x)
+```
 
+```python
 def sn(q): return smoothstep(0.0,0.8,sin(q))#lerp(-1, 1, ease(map(sin(q), -1, 1, 0, 1), 5))
-
+```
 ## Misc
 
+```python
 def normalizeList(alist,multiply): return [1.0*multiply*i/sum(alist) for i in alist]
+```
 
 # Custom shapes
 
+```python
 class Mesh(object):
     def __init__(self, obj):
         self.obj = obj
@@ -125,7 +132,9 @@ class Mesh(object):
                 vec = self.vertices[j]
                 someScene.vertex(vec.x,vec.y,vec.z)
         someScene.endShape() 
+```
 
+```python
 def boxc(L,W,H,T):
     points = [PVector(0,0),
               PVector(L,0),
@@ -141,11 +150,13 @@ def boxc(L,W,H,T):
             vertex(i.x,i.y,0)
             fill(lerp(0,255,T))
             vertex(i.x,i.y,lerp(-H,H,T))
+```
 
 # Grids
 
 ## Subdivision
 
+```python
 class Quadrant(object):
     def __init__(self,x,y,w,h):
         global globalCount 
@@ -166,6 +177,7 @@ class Quadrant(object):
     def display(self,param):
         #YOUR MODULE GOES HERE
         rect(self.x,self.y,self.w,self.h)
+```
 
 # GLSL stuff
 
@@ -190,6 +202,7 @@ class Quadrant(object):
                                                   float(colors.z))
 ```
 
+```python
 def expression(time,i,j):
     amplitude = 5.0
     frequency = 0.1
@@ -203,6 +216,7 @@ def expression(time,i,j):
     transformation += sin(TWO_PI*time+frequency*3.1122+delay)
     transformation *= amplitude
     return map(transformation,-amplitude,amplitude,0,1)
+```
 
 # Interpolations
 
