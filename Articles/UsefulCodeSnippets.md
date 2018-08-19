@@ -1,6 +1,6 @@
 # Useful code snippets
 
-I find myself returning to a lot of repeated code, and so I've decided to compile the most frequent code I keep returning to. This will range in areas from some useful functions for github maintenance to shaders, to processing, and whatever else I use on the regular.
+I find myself returning to a lot of repeated code, and so I've decided to compile it here for easier accessibilty. This will range in areas from some useful functions for github maintenance to shaders, to processing, and whatever else I use on the regular.
 
 ## Terminal Commands
 
