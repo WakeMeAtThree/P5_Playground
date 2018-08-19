@@ -112,6 +112,19 @@ def sn(q): return smoothstep(0.0,0.8,sin(q))#lerp(-1, 1, ease(map(sin(q), -1, 1,
 
 ```python
 def normalizeList(alist,multiply): return [1.0*multiply*i/sum(alist) for i in alist]
+def sumPrev(alist): return [0]+[sum(alist[:index+1]) for index,i in enumerate(alist)][:-1]
+```
+
+Mini example:
+```python
+def setup():
+    size(400,400)
+    ellipseMode(CORNER)
+    sizes = [ i for i in range(10) ]
+    sizes = normalizeList(sizes,width)
+    positions = sumPrev(sizes)
+    for i,j in zip(positions,sizes):
+        rect(i,0,j,50)
 ```
 
 ## Custom shapes
