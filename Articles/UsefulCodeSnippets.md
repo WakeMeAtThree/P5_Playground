@@ -1,6 +1,11 @@
 # Useful code snippets
 
-The following are useful `ffmpeg` commands for making animation gifs/mp4. 
+I find myself returning to a lot of repeated code, and so I've decided to compile the most frequent code I keep returning to. This will range in areas from some useful functions for github maintenance to shaders, to processing, and whatever else I use on the regular.
+
+## Terminal Commands
+
+### FFmpeg
+The following are useful `ffmpeg` commands for making animation gifs/mp4 (I should look into [gifiscle](https://www.lcdf.org/gifsicle/)). 
 
 Turning image sequence to a video
 ```
@@ -19,12 +24,19 @@ ffmpeg -i output.mp4 -i palette.png -filter_complex “fps=30,scale=400:-1:flags
 ffmpeg -ss 2.6 -t 1.3 -i output.mp4 -i palette.png -filter_complex “fps=30,scale=400:-1:flags=lanczos[x];[x][1:v]paletteuse” output.gif
 ```
 
+I have compiled all of this into a simple bat file that I keep reusing under the alias `animate`.
+
+```cmd
+@echo off
+cmd /k "ffmpeg -start_number 1 -framerate 30 -i animation%%3d.png -pix_fmt yuv420p output.mp4 & pause & ffmpeg -i output.mp4 -vf palettegen palette.png & pause & ffmpeg -i output.mp4 -i palette.png -filter_complex ""fps=30,scale=400:-1:flags=lanczos[x];[x][1:v]paletteuse"" output.gif"
+```
+### Processing
 Running a processing sketch in terminal [Check this out](https://github.com/processing/processing/wiki/Command-Line):
 
 ```
 processing-java --sketch=%cd% --run
 ```
-
+### Git
 Reseting changes in a local clone
 
 ```git
@@ -52,9 +64,9 @@ Table generators in markdown
 - [Another table generator](https://donatstudios.com/CsvToMarkdownTable)
 
 
-# Utility 
+## Utility
 
-## Loading csv points from Grasshopper
+### Loading csv points from Grasshopper
 
 ```python
 def loadPoints(fname):
@@ -80,7 +92,7 @@ def lerpList(list1,list2,amt):
     return [PVector.lerp(i,j,amt) for i,j in zip(list1,list2)]
 ```
 
-## Eases
+### Eases
 
 ```python
 def smoothstep(edge0, edge1, x):
@@ -93,14 +105,15 @@ def smoothstep(edge0, edge1, x):
 ```python
 def sn(q): return smoothstep(0.0,0.8,sin(q))#lerp(-1, 1, ease(map(sin(q), -1, 1, 0, 1), 5))
 ```
-## Misc
+### Misc
 
 ```python
 def normalizeList(alist,multiply): return [1.0*multiply*i/sum(alist) for i in alist]
 ```
 
-# Custom shapes
+## Custom shapes
 
+### Loaded meshes in processing
 ```python
 class Mesh(object):
     def __init__(self, obj):
@@ -134,6 +147,7 @@ class Mesh(object):
         someScene.endShape() 
 ```
 
+### Custom box with per-vertex coloring
 ```python
 def boxc(L,W,H,T):
     points = [PVector(0,0),
@@ -152,9 +166,9 @@ def boxc(L,W,H,T):
             vertex(i.x,i.y,lerp(-H,H,T))
 ```
 
-# Grids
+## Grids
 
-## Subdivision
+### Subdivision
 
 ```python
 class Quadrant(object):
@@ -178,6 +192,8 @@ class Quadrant(object):
         #YOUR MODULE GOES HERE
         rect(self.x,self.y,self.w,self.h)
 ```
+
+
 
 # GLSL stuff
 
