@@ -93,6 +93,17 @@ def lerpLists(lists,amt):
 def lerpList(list1,list2,amt):
     return [PVector.lerp(i,j,amt) for i,j in zip(list1,list2)]
 ```
+### ShearZ
+[Check this out](https://en.wikipedia.org/wiki/Transformation_matrix).
+
+```python
+    with pushMatrix():
+        applyMatrix(  
+        1.0, 0.0, 1.0,  0.0,
+        0.0, 1.0, 0.0,  0.0,
+        0.0, 0.0, 1.0,  0.0,
+        0.0, 0.0, 0.0,  1.0);
+```
 
 ### Eases
 
@@ -269,7 +280,7 @@ def expression(time,i,j):
     transformation *= amplitude
     return map(transformation,-amplitude,amplitude,0,1)
 ```
-## Necessary funcs ported to GLSL
+### Necessary funcs ported to GLSL
 ```glsl
 
 float norm(float t, float a, float b){
