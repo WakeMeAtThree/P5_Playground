@@ -384,7 +384,7 @@ def lerpVectors(vecs, amt):
 ### Lerping across different colors
 
 ```python
-def lerpColors(amt, colorOptions):
+def lerpColors(colorOptions,amt):
     """Lerp function that takes an amount between 0 and 1, 
     and a list of colors and returns the appropriate
     interpolation"""
