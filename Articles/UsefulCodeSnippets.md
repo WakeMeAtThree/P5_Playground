@@ -405,5 +405,28 @@ def lerpColors(amt, colorOptions):
 
 ```
 
+## Drawing tools
+### Mesh strips
 
+```python
+def drawMesh(lines):
+    strokeWeight(1)
+    for i in range(len(lines)-1):
+        wave = 1.0*i/(len(lines)-2)
+        with beginShape(QUAD_STRIP):
+            for index,j in enumerate(zip(lines[i],lines[i+1])):
+                param = 1.0*index/(len(lines[i])-1)
+                a = j[0]
+                b = j[1]
+                ease = map(sin(TWO_PI*(param+wave)+t),-1,1,0,1)**0.8
+                c = lerpColors(colorOptions,ease)
+                fill(c)
+                vertex(a.x,a.y)
+                vertex(b.x,b.y)
+
+def drawLine(p1,p2,res):
+    return [PVector.lerp(p1,
+                         p2,
+                         1.0*i/(res-1)) for i in range(res)]
+```
 
