@@ -109,14 +109,12 @@ def lerpList(list1,list2,amt):
 
 ```python
 def smoothstep(edge0, edge1, x):
-    # Scale, bias and saturate x to 0..1 range
     x = constrain((x - edge0) / (edge1 - edge0), 0.0, 1.0)
-    # Evaluate polynomial
     return x * x * (3 - 2 * x)
 ```
 
 ```python
-def sn(q): return smoothstep(0.0,0.8,sin(q))#lerp(-1, 1, ease(map(sin(q), -1, 1, 0, 1), 5))
+def sn(q): return smoothstep(0.0,0.8,sin(q))
 ```
 
 ### Normalizing the sum of elements in a list
@@ -182,15 +180,27 @@ def boxc(L,W,H,T):
               PVector(L,W),
               PVector(0,W),
               PVector(0,0)]
-    #noStroke()
-    #
-    #
     with beginShape(QUAD_STRIP):
         for i in points:
             fill(lerp(255,0,T))
             vertex(i.x,i.y,0)
             fill(lerp(0,255,T))
             vertex(i.x,i.y,lerp(-H,H,T))
+```
+
+```python
+def dashedLine(p1,p2):
+    #Play with these parameters
+    res = 20
+    step = 2
+    
+    points = [PVector.lerp(p1,
+                           p2,
+                           1.0*i/res) for i in range(res+1)]
+    for i in range(len(points))[:-1:step]:
+        v1 = points[i]
+        v2 = points[i+1]
+        line(v1.x,v1.y,v2.x,v2.y)
 ```
 
 ## Grids
