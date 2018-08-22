@@ -3,15 +3,16 @@
 I find myself returning to a lot of repeated code, and so I've decided to compile it here for easier accessibilty, rather than going through my sketches one by one to sift through what I need. This will range in areas from some useful functions for github maintenance to shaders, to processing, and whatever else I use on the regular.
 
 ## Drawing tools and custom shapes
-### Mesh strips
-
+### Generate points between two points
 This function will take two points and return a specified number of points.
 ```python
 def drawLine(p1,p2,res):
     return [PVector.lerp(p1,
                          p2,
                          1.0*i/(res-1)) for i in range(res)]
+                         
 ```
+### Mesh strips
 This function will take a list of "curves", where a single curve is essentially a list of points, and will draw a QUAD_STRIP through them all. Has some left over coloring strategies, but you can ignore it if you don't need it.
 
 ```python
@@ -31,7 +32,8 @@ def drawMesh(lines):
                 vertex(b.x,b.y)
 ```
 
-### Loaded meshes in processing
+### Load external obj meshes in processing
+I like to have a bit more control on the individual vertices in a mesh, hence why I made a class for it. There are better ways to do this, but for me this helps me achieve a certain kind of morph that I'm going for. 
 ```python
 class Mesh(object):
     def __init__(self, obj):
