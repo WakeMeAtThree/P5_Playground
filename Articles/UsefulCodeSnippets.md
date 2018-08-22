@@ -2,7 +2,7 @@
 
 I find myself returning to a lot of repeated code, and so I've decided to compile it here for easier accessibilty. This will range in areas from some useful functions for github maintenance to shaders, to processing, and whatever else I use on the regular.
 
-## Drawing tools
+## Drawing tools and custom shapes
 ### Mesh strips
 
 This function will take two points and return a specified number of points.
@@ -29,6 +29,72 @@ def drawMesh(lines):
                 fill(c)
                 vertex(a.x,a.y)
                 vertex(b.x,b.y)
+```
+
+### Loaded meshes in processing
+```python
+class Mesh(object):
+    def __init__(self, obj):
+        self.obj = obj
+        self.vertices = []
+        self.faces = []
+        
+        for i in range(obj.getChildCount()):
+            for j in range(obj.getChild(i).getVertexCount()):
+                v = obj.getChild(i).getVertex(j)
+                self.vertices.append(v)
+                
+        
+        for i in range(obj.getChildCount()):
+            faceindex = []
+            for j in range(obj.getChild(i).getVertexCount()):
+                v = obj.getChild(i).getVertex(j)
+                faceindex.append(self.vertices.index(v))
+            self.faces.append(faceindex)
+    def morph(self,initial,target,a):
+        self.vertices = [PVector.lerp(i,j,map(cs(TWO_PI*a),-1,1,0,1)) for i,j in zip(initial.vertices,target.vertices)]
+    def display(self, a,someScene):
+        someScene.noStroke()
+        someScene.beginShape(QUADS)
+        for index,i in enumerate(self.faces):
+            param = 1.0 * index/len(self.faces)
+            for j in i:
+                someScene.fill(lerpColor("#0EC0E1", "#DD3A7C",0.5*map(cs(TWO_PI*a), -1, 1, 0, 1)+0.5*map(cs(TWO_PI*a+1.5), -1, 1, 0, 1)))
+                vec = self.vertices[j]
+                someScene.vertex(vec.x,vec.y,vec.z)
+        someScene.endShape() 
+```
+
+### Custom box with per-vertex coloring
+```python
+def boxc(L,W,H,T):
+    points = [PVector(0,0),
+              PVector(L,0),
+              PVector(L,W),
+              PVector(0,W),
+              PVector(0,0)]
+    with beginShape(QUAD_STRIP):
+        for i in points:
+            fill(lerp(255,0,T))
+            vertex(i.x,i.y,0)
+            fill(lerp(0,255,T))
+            vertex(i.x,i.y,lerp(-H,H,T))
+```
+### dashed lines
+
+```python
+def dashedLine(p1,p2):
+    #Play with these parameters
+    res = 20
+    step = 2
+    
+    points = [PVector.lerp(p1,
+                           p2,
+                           1.0*i/res) for i in range(res+1)]
+    for i in range(len(points))[:-1:step]:
+        v1 = points[i]
+        v2 = points[i+1]
+        line(v1.x,v1.y,v2.x,v2.y)
 ```
 
 ## Terminal Commands
@@ -216,72 +282,6 @@ def smoothstep(edge0, edge1, x):
 
 ```python
 def sn(q): return smoothstep(0.0,0.8,sin(q))
-```
-
-## Custom shapes
-### Loaded meshes in processing
-```python
-class Mesh(object):
-    def __init__(self, obj):
-        self.obj = obj
-        self.vertices = []
-        self.faces = []
-        
-        for i in range(obj.getChildCount()):
-            for j in range(obj.getChild(i).getVertexCount()):
-                v = obj.getChild(i).getVertex(j)
-                self.vertices.append(v)
-                
-        
-        for i in range(obj.getChildCount()):
-            faceindex = []
-            for j in range(obj.getChild(i).getVertexCount()):
-                v = obj.getChild(i).getVertex(j)
-                faceindex.append(self.vertices.index(v))
-            self.faces.append(faceindex)
-    def morph(self,initial,target,a):
-        self.vertices = [PVector.lerp(i,j,map(cs(TWO_PI*a),-1,1,0,1)) for i,j in zip(initial.vertices,target.vertices)]
-    def display(self, a,someScene):
-        someScene.noStroke()
-        someScene.beginShape(QUADS)
-        for index,i in enumerate(self.faces):
-            param = 1.0 * index/len(self.faces)
-            for j in i:
-                someScene.fill(lerpColor("#0EC0E1", "#DD3A7C",0.5*map(cs(TWO_PI*a), -1, 1, 0, 1)+0.5*map(cs(TWO_PI*a+1.5), -1, 1, 0, 1)))
-                vec = self.vertices[j]
-                someScene.vertex(vec.x,vec.y,vec.z)
-        someScene.endShape() 
-```
-
-### Custom box with per-vertex coloring
-```python
-def boxc(L,W,H,T):
-    points = [PVector(0,0),
-              PVector(L,0),
-              PVector(L,W),
-              PVector(0,W),
-              PVector(0,0)]
-    with beginShape(QUAD_STRIP):
-        for i in points:
-            fill(lerp(255,0,T))
-            vertex(i.x,i.y,0)
-            fill(lerp(0,255,T))
-            vertex(i.x,i.y,lerp(-H,H,T))
-```
-
-```python
-def dashedLine(p1,p2):
-    #Play with these parameters
-    res = 20
-    step = 2
-    
-    points = [PVector.lerp(p1,
-                           p2,
-                           1.0*i/res) for i in range(res+1)]
-    for i in range(len(points))[:-1:step]:
-        v1 = points[i]
-        v2 = points[i+1]
-        line(v1.x,v1.y,v2.x,v2.y)
 ```
 
 ## Grids
