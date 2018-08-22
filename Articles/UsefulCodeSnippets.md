@@ -2,8 +2,36 @@
 
 I find myself returning to a lot of repeated code, and so I've decided to compile it here for easier accessibilty. This will range in areas from some useful functions for github maintenance to shaders, to processing, and whatever else I use on the regular.
 
-## Terminal Commands
+## Drawing tools
+### Mesh strips
 
+This function will take two points and return a specified number of points.
+```python
+def drawLine(p1,p2,res):
+    return [PVector.lerp(p1,
+                         p2,
+                         1.0*i/(res-1)) for i in range(res)]
+```
+This function will take a list of "curves", where a single curve is essentially a list of points, and will draw a QUAD_STRIP through them all. Has some left over coloring strategies, but you can ignore it if you don't need it.
+
+```python
+def drawMesh(lines):
+    strokeWeight(1)
+    for i in range(len(lines)-1):
+        wave = 1.0*i/(len(lines)-2)
+        with beginShape(QUAD_STRIP):
+            for index,j in enumerate(zip(lines[i],lines[i+1])):
+                param = 1.0*index/(len(lines[i])-1)
+                a = j[0]
+                b = j[1]
+                ease = map(sin(TWO_PI*(param+wave)+t),-1,1,0,1)**0.8
+                c = lerpColors(colorOptions,ease)
+                fill(c)
+                vertex(a.x,a.y)
+                vertex(b.x,b.y)
+```
+
+## Terminal Commands
 ### FFmpeg
 The following are useful `ffmpeg` commands for making animation gifs/mp4 (I should look into [gifiscle](https://www.lcdf.org/gifsicle/)). 
 
@@ -65,58 +93,6 @@ Table generators in markdown
 
 
 ## Utility
-
-### Loading csv points from Grasshopper
-
-```python
-def loadPoints(fname):
-    with open(fname) as f:
-        content = f.readlines()
-    data = [i.replace('\n','')[1:][:-1].split(',') for i in content]
-    data = [PVector(*map(float,i)) for i in data]
-    return data
-```
-### Lerping through different point clouds
-```python
-def lerpLists(lists,amt):
-    if(len(lists)==1):
-        return lists[0]
-    spacing = 1.0/(len(lists)-1)
-    lhs = floor(amt/spacing)
-    rhs = ceil(amt/spacing)
-    try:
-        return lerpList(lists[lhs], lists[rhs], amt%spacing/spacing)
-    except:
-        return lerpList(lists[constrain(lhs, 0, len(lists)-2)],
-                        lists[constrain(rhs, 1, len(lists)-1)],
-                        amt)
-def lerpList(list1,list2,amt):
-    return [PVector.lerp(i,j,amt) for i,j in zip(list1,list2)]
-```
-### ShearZ
-[Check this out](https://en.wikipedia.org/wiki/Transformation_matrix).
-
-```python
-    with pushMatrix():
-        applyMatrix(  
-        1.0, 0.0, 1.0,  0.0,
-        0.0, 1.0, 0.0,  0.0,
-        0.0, 0.0, 1.0,  0.0,
-        0.0, 0.0, 0.0,  1.0);
-```
-
-### Eases
-
-```python
-def smoothstep(edge0, edge1, x):
-    x = constrain((x - edge0) / (edge1 - edge0), 0.0, 1.0)
-    return x * x * (3 - 2 * x)
-```
-
-```python
-def sn(q): return smoothstep(0.0,0.8,sin(q))
-```
-
 ### Normalizing the sum of elements in a list
 
 ```python
@@ -136,8 +112,113 @@ def setup():
         rect(i,0,j,50)
 ```
 
-## Custom shapes
+### Loading csv points from Grasshopper
 
+I usually work in Rhino and find myself exporting point clouds from a Grasshopper stream to a csv file, and from there I use it in processing. Here's a snippet I wrote that I keep returning to for these things:
+```python
+def loadPoints(fname):
+    with open(fname) as f:
+        content = f.readlines()
+    data = [i.replace('\n','')[1:][:-1].split(',') for i in content]
+    data = [PVector(*map(float,i)) for i in data]
+    return data
+```
+
+## Interpolations
+### Cosine interpolation 
+Note that if you're using something other than linear interpolation, make sure at one of your axes use the normal lerp, while the last axis uses your non-linear lerp.
+
+```python
+def cosineLerpVec(v1,v2,amt):
+    x = lerp(v1.x,v2.x,amt)
+    y = cosineLerp(v1.y,v2.y,amt)
+    return PVector(x,y)
+def cosineLerp(y1,y2,mu):
+    mu2 = (1-cos(mu*PI))/2
+    return y1*(1-mu2)+y2*mu2
+
+def lerpVectors(vecs, amt):
+    if(len(vecs)==1): return vecs[0]
+    
+    spacing = 1.0/(len(vecs)-1);
+    lhs = floor(amt / spacing);
+    rhs = ceil(amt / spacing);
+    
+    try:
+        return cosineLerpVec(vecs[lhs], vecs[rhs], amt%spacing/spacing);
+    except:
+        return cosineLerpVec(vecs[constrain(lhs, 0, len(vecs)-2)], vecs[constrain(rhs, 1, len(vecs)-1)], amt);
+```
+
+### Lerping across different colors
+```python
+def lerpColors(colorOptions,amt):
+    """Lerp function that takes an amount between 0 and 1, 
+    and a list of colors and returns the appropriate
+    interpolation"""
+    
+    if (len(colorOptions)==1): return colorOptions[0]
+    spacing = 1.0/(len(colorOptions)-1)
+    lhs = floor(amt/spacing)
+    rhs = ceil(amt/spacing)
+    
+    try:
+        return lerpColor(colorOptions[lhs], 
+                         colorOptions[rhs], 
+                         amt%spacing/spacing)
+    except:
+        return lerpColor(colorOptions[constrain(lhs, 0, len(colorOptions)-2)], 
+                         colorOptions[constrain(rhs, 1, len(colorOptions)-1)], 
+                         amt);
+
+```
+I use the following lerp function to lerp through multiple pointsets, not just the default of two pointsets commonly used in lerps. It helps to add more layers to your work.
+
+### Lerping through different point clouds
+```python
+def lerpLists(lists,amt):
+    if(len(lists)==1):
+        return lists[0]
+    spacing = 1.0/(len(lists)-1)
+    lhs = floor(amt/spacing)
+    rhs = ceil(amt/spacing)
+    try:
+        return lerpList(lists[lhs], lists[rhs], amt%spacing/spacing)
+    except:
+        return lerpList(lists[constrain(lhs, 0, len(lists)-2)],
+                        lists[constrain(rhs, 1, len(lists)-1)],
+                        amt)
+def lerpList(list1,list2,amt):
+    return [PVector.lerp(i,j,amt) for i,j in zip(list1,list2)]
+```
+
+## Display tricks
+### ShearZ
+[Check this out](https://en.wikipedia.org/wiki/Transformation_matrix).
+
+```python
+    with pushMatrix():
+        applyMatrix(  
+        1.0, 0.0, 1.0,  0.0,
+        0.0, 1.0, 0.0,  0.0,
+        0.0, 0.0, 1.0,  0.0,
+        0.0, 0.0, 0.0,  1.0);
+```
+
+### Eases
+I like using smoothsteps a lot, and if I need it to be periodic, I'll just smoothstep a sin function. If there was a need to create multiple steps, I scale down the results of one smoothstep, and add another smoothsteps to take have more than two steps.
+
+```python
+def smoothstep(edge0, edge1, x):
+    x = constrain((x - edge0) / (edge1 - edge0), 0.0, 1.0)
+    return x * x * (3 - 2 * x)
+```
+
+```python
+def sn(q): return smoothstep(0.0,0.8,sin(q))
+```
+
+## Custom shapes
 ### Loaded meshes in processing
 ```python
 class Mesh(object):
@@ -204,7 +285,6 @@ def dashedLine(p1,p2):
 ```
 
 ## Grids
-
 ### Subdivision
 
 ```python
@@ -354,79 +434,5 @@ int getMinP(float list[number]) {
   }
   return minPos;
 }
-```
-
-## Interpolations
-### Cosine interpolation 
-
-```python
-def cosineLerpVec(v1,v2,amt):
-    x = lerp(v1.x,v2.x,amt)
-    y = cosineLerp(v1.y,v2.y,amt)
-    return PVector(x,y)
-def cosineLerp(y1,y2,mu):
-    mu2 = (1-cos(mu*PI))/2
-    return y1*(1-mu2)+y2*mu2
-
-def lerpVectors(vecs, amt):
-    if(len(vecs)==1): return vecs[0]
-    
-    spacing = 1.0/(len(vecs)-1);
-    lhs = floor(amt / spacing);
-    rhs = ceil(amt / spacing);
-    
-    try:
-        return cosineLerpVec(vecs[lhs], vecs[rhs], amt%spacing/spacing);
-    except:
-        return cosineLerpVec(vecs[constrain(lhs, 0, len(vecs)-2)], vecs[constrain(rhs, 1, len(vecs)-1)], amt);
-```
-
-### Lerping across different colors
-
-```python
-def lerpColors(colorOptions,amt):
-    """Lerp function that takes an amount between 0 and 1, 
-    and a list of colors and returns the appropriate
-    interpolation"""
-    
-    if (len(colorOptions)==1): return colorOptions[0]
-    spacing = 1.0/(len(colorOptions)-1)
-    lhs = floor(amt/spacing)
-    rhs = ceil(amt/spacing)
-    
-    try:
-        return lerpColor(colorOptions[lhs], 
-                         colorOptions[rhs], 
-                         amt%spacing/spacing)
-    except:
-        return lerpColor(colorOptions[constrain(lhs, 0, len(colorOptions)-2)], 
-                         colorOptions[constrain(rhs, 1, len(colorOptions)-1)], 
-                         amt);
-
-```
-
-## Drawing tools
-### Mesh strips
-
-```python
-def drawMesh(lines):
-    strokeWeight(1)
-    for i in range(len(lines)-1):
-        wave = 1.0*i/(len(lines)-2)
-        with beginShape(QUAD_STRIP):
-            for index,j in enumerate(zip(lines[i],lines[i+1])):
-                param = 1.0*index/(len(lines[i])-1)
-                a = j[0]
-                b = j[1]
-                ease = map(sin(TWO_PI*(param+wave)+t),-1,1,0,1)**0.8
-                c = lerpColors(colorOptions,ease)
-                fill(c)
-                vertex(a.x,a.y)
-                vertex(b.x,b.y)
-
-def drawLine(p1,p2,res):
-    return [PVector.lerp(p1,
-                         p2,
-                         1.0*i/(res-1)) for i in range(res)]
 ```
 
