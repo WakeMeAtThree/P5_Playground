@@ -194,7 +194,7 @@ def lerpList(list1,list2,amt):
 
 ## Display tricks
 ### ShearZ
-[Check this out](https://en.wikipedia.org/wiki/Transformation_matrix).
+I like to use this so I can have a nice axonometric. This should become a processing function in addition to shearX and shearY. [Check this out](https://en.wikipedia.org/wiki/Transformation_matrix).
 
 ```python
     with pushMatrix():
