@@ -25,11 +25,12 @@ def drawMesh(lines):
                 param = 1.0*index/(len(lines[i])-1)
                 a = j[0]
                 b = j[1]
-                ease = map(sin(TWO_PI*(param+wave)+t),-1,1,0,1)**0.8
-                c = lerpColors(colorOptions,ease)
-                fill(c)
-                vertex(a.x,a.y)
-                vertex(b.x,b.y)
+                c1 = lerpColors(colorOptions,wave)
+                fill(c1)
+                vertex(a.x,a.y,a.z)
+                c2 = lerpColors(colorOptions,wave+1.0/(len(lines)-2))
+                fill(c2)
+                vertex(b.x,b.y,b.z)
 ```
 
 ### Load external obj meshes in processing
