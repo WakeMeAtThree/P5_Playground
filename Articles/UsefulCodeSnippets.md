@@ -162,6 +162,12 @@ Table generators in markdown
 
 
 ## Utility
+
+### Flatten a list
+```python
+flatten = lambda l: [item for sublist in l for item in sublist]
+```
+
 ### Normalizing the sum of elements in a list
 
 ```python
