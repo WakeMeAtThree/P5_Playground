@@ -319,7 +319,7 @@ class Quadrant(object):
         rect(self.x,self.y,self.w,self.h)
 ```
 
-## Normalized Dynamic Grid 
+### Normalized Dynamic Grid 
 I gotta simplify this, but for now:
 ```python
 # 1D Grid
@@ -338,6 +338,23 @@ def getMatrix(X,Y,W=400,chance=None):
     return M
 def getPositions(M):
     return [sumPrev(i) for i in M]
+```
+
+I also use this to create a dynamic expression/offset:
+```python
+def expression(time,i,j):
+    amplitude = 5.0
+    frequency = 0.1
+    delay = 1.0*(i+j)/(X+Y-2)
+    
+    transformation = sin(TWO_PI*time+delay*frequency)
+    transformation += cos(TWO_PI*time+frequency+delay)
+    transformation += sin(TWO_PI*time+frequency*2.1+delay)
+    transformation += sin(TWO_PI*time+frequency*1.72+delay)
+    transformation += cos(TWO_PI*time+frequency*2.221+delay)
+    transformation += sin(TWO_PI*time+frequency*3.1122+delay)
+    transformation *= amplitude
+    return map(transformation,-amplitude,amplitude,0,1)
 ```
 
 ## GLSL stuff
@@ -364,21 +381,7 @@ def getPositions(M):
                                                   float(colors.z))
 ```
 
-```python
-def expression(time,i,j):
-    amplitude = 5.0
-    frequency = 0.1
-    delay = 1.0*(i+j)/(X+Y-2)
-    
-    transformation = sin(TWO_PI*time+delay*frequency)
-    transformation += cos(TWO_PI*time+frequency+delay)
-    transformation += sin(TWO_PI*time+frequency*2.1+delay)
-    transformation += sin(TWO_PI*time+frequency*1.72+delay)
-    transformation += cos(TWO_PI*time+frequency*2.221+delay)
-    transformation += sin(TWO_PI*time+frequency*3.1122+delay)
-    transformation *= amplitude
-    return map(transformation,-amplitude,amplitude,0,1)
-```
+
 ### Necessary funcs ported to GLSL
 ```glsl
 
