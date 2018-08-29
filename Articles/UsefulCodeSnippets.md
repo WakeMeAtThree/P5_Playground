@@ -83,7 +83,7 @@ def boxc(L,W,H,T):
             fill(lerp(0,255,T))
             vertex(i.x,i.y,lerp(-H,H,T))
 ```
-### dashed lines
+### Dashed lines
 
 ```python
 def dashedLine(p1,p2):
@@ -162,6 +162,25 @@ Table generators in markdown
 
 
 ## Utility
+### Using decorators to style drawing functions
+Here's a simple example of this workflow:
+```python
+def style(func):
+    def wrapper(*args,**kwargs):
+        with pushStyle():
+            strokeWeight(5)
+            stroke(255,0,0)
+            func(*args,**kwargs)
+    return wrapper
+
+@style
+def drawLine(x1,y1,x2,y2):
+    line(x1,y1,x2,y2)
+
+def setup():
+    size(400,400)
+    drawLine(0,0,width,height)
+```
 
 ### Flatten a list
 ```python
