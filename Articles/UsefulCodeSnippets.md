@@ -102,7 +102,7 @@ def dashedLine(p1,p2):
 
 ## Terminal Commands
 ### FFmpeg
-The following are useful `ffmpeg` commands for making animation gifs/mp4 (I should look into [gifiscle](https://www.lcdf.org/gifsicle/)). 
+The following are useful `ffmpeg` commands for making animation gifs/mp4 ~~(I should look into [gifiscle](https://www.lcdf.org/gifsicle/))~~. Also [check out this blog post](https://manerosss.wordpress.com/2016/06/29/how-to-convert-a-video-to-gif-using-ffmpeg/).
 
 Turning image sequence to a video
 ```
