@@ -3,6 +3,10 @@
 I find myself returning to a lot of repeated code, and so I've decided to compile it here for easier accessibilty, rather than going through my sketches one by one to sift through what I need. This will range in areas from some useful functions for github maintenance to shaders, to processing, and whatever else I use on the regular.
 
 ## Drawing tools and custom shapes
+
+### Catenary curve
+Useful source for drawing a catenary curve: http://mathworld.wolfram.com/Catenary.html (note to self: prep cycloid curve as well)
+
 ### Generate points between two points
 This function will take two points and return a specified number of points.
 ```python
