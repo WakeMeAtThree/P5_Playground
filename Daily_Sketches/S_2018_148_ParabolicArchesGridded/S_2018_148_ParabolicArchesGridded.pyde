@@ -11,13 +11,14 @@ def draw():
     background(255)
     translate(width/2,height/2-103)
     print(mouseX,mouseY)
-    scale(0.5)
+    scale(0.25)
     rotateX(PI/6)
     rotateZ(PI/4)
-    for i in range(5):
-        for j in range(5):
-            delay = 15.0*(i+j)/(5+5-2)
-            parabolicBox(i*100,j*100,-50,50,sin(millis()/1000.0+delay)*350*noise(13*i,13*j+millis()/1000.0))
+    X,Y = 15,15
+    for i in range(X):
+        for j in range(Y):
+            delay = 1.0*(i+j)/(X+Y-2)
+            parabolicBox(i*100,j*100,-50,50,expression(millis()/1000.0,i,j))#sin(millis()/1000.0+delay)*350*noise(13*i,13*j+millis()/1000.0))
             
     
 def myBox(X,Y,L,W,H):
@@ -49,11 +50,11 @@ def parabolicBox(X,Y,X1,X2,H):
                 rotate(PI/2*i)
                 translate(0,X2)
                 rotateX(PI/2)
-                strokeWeight(14)
+                strokeWeight(3)
                 stroke(0,0,0)
                 noFill()
                 parabola(0,0,X1,X2,H)
-                strokeWeight(7)
+                strokeWeight(3)
                 stroke(255)
                 noFill()
                 #parabola(0+0.05,0+0.05,X1,X2,H+0.05)
@@ -64,3 +65,16 @@ def parabola(X,Y,a,b,scl):
             for i in range(floor(a),ceil(b)):
                 vertex(i,f(i,a,b,scl))
 def f(x,a,b,scl): return scl*(x-a)*(x-b)/(a*b)
+def expression(time,i,j):
+    amplitude = 5.0
+    frequency = 0.1
+    delay = 1.0*(i+j)/(X+Y-2)
+    
+    transformation = sin(TWO_PI*time+delay*frequency)
+    transformation += cos(TWO_PI*time+frequency+delay)
+    transformation += sin(TWO_PI*time+frequency*2.1+delay)
+    transformation += sin(TWO_PI*time+frequency*1.72+delay)
+    transformation += cos(TWO_PI*time+frequency*2.221+delay)
+    transformation += sin(TWO_PI*time+frequency*3.1122+delay)
+    transformation *= amplitude
+    return map(transformation,-amplitude,amplitude,0,100)
