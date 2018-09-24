@@ -8,3 +8,4 @@ WIP
 - [ ] Process workflow
 - [ ] Controlling noise flow field
 - [ ] Try/Except workflow
+- [ ] Pen and paper sketches of code
