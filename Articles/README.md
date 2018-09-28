@@ -9,3 +9,4 @@ WIP
 - [ ] Controlling noise flow field
 - [ ] Try/Except workflow
 - [ ] Pen and paper sketches of code
+- [ ] Colors (phase shift+color sorting+fbms)

@@ -4,6 +4,9 @@ I find myself returning to a lot of repeated code, and so I've decided to compil
 
 ## Drawing tools and custom shapes
 
+### Tranformation matrices
+[Tranformation Matrix wiki articke](https://en.wikipedia.org/wiki/Transformation_matrix). Also, [3b1b video on quarternions](https://www.youtube.com/watch?v=d4EgbgTm0Bg).
+
 ### Catenary curve
 Useful source for drawing a catenary curve: http://mathworld.wolfram.com/Catenary.html (note to self: prep cycloid curve as well)
 
