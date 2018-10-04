@@ -92,6 +92,8 @@ def boxc(L,W,H,T):
 ```
 
 ### Custom box with adjustable face colors class
+Use this [color generator](https://coolors.co/) as well for inspiration.
+
 ```python
 def setup():
     size(400,400,P3D)
