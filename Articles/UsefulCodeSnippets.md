@@ -7,6 +7,14 @@ I find myself returning to a lot of repeated code, and so I've decided to compil
 ### Tranformation matrices
 [Tranformation Matrix wiki articke](https://en.wikipedia.org/wiki/Transformation_matrix). Also, [3b1b video on quarternions](https://www.youtube.com/watch?v=d4EgbgTm0Bg).
 
+```python
+def vec_rotateY( v, angle):
+    x = v.x*cos(angle)+v.z*sin(angle)
+    y = v.y
+    z = -v.x*sin(angle)+v.z*cos(angle)
+    return PVector(x,y,z)
+```
+
 ### Catenary curve
 Useful source for drawing a catenary curve: http://mathworld.wolfram.com/Catenary.html (note to self: prep cycloid curve as well)
 
