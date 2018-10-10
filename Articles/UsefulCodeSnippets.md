@@ -15,6 +15,22 @@ def vec_rotateY( v, angle):
     return PVector(x,y,z)
 ```
 
+### Revolve
+
+```python
+def dome(X,Y,radius):
+    section = circSection(radius)
+    with pushMatrix():
+        translate(X,Y)
+        rotateX(PI/2)
+        drawMesh(zip(*revolve(section)))
+def revolve(section):
+    res = 45
+    output = [ [vec_rotateY(i,TWO_PI*j/(res-1)) for i in section]
+                for j in range(res)]
+    return output
+```
+
 ### Catenary curve
 Useful source for drawing a catenary curve: http://mathworld.wolfram.com/Catenary.html (note to self: prep cycloid curve as well)
 
@@ -47,6 +63,7 @@ def drawMesh(lines):
                 fill(c2)
                 vertex(b.x,b.y,b.z)
 ```
+
 
 ### Load external obj meshes in processing
 I like to have a bit more control on the individual vertices in a mesh, hence why I made a class for it. There are better ways to do this, but for me this helps me achieve a certain kind of morph that I'm going for. 
