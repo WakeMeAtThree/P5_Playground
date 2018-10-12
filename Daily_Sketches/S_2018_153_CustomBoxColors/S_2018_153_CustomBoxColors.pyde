@@ -23,6 +23,7 @@ def setup():
     colors7 = ["#fab500","#d23b06","#201e1a","#eae2d4"][::-1]
     colors8 = ["#d23b06","#275d95","#201e1a","#eae2d4"][::]
     colors9 = ["#d7a23c","#c9c8b9","#c9c8b9","#282828"][::]
+    colorsA = ["#5DD9C1","#ACFCD9","#B084CC","#665687","#190933"]
     Box8 = myBox(*colors1)
     #stroke("#8159af")
     Box8.display(0,0,100,100,100)
