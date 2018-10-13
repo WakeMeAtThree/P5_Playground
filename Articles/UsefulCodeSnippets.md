@@ -4,6 +4,10 @@ I find myself returning to a lot of repeated code, and so I've decided to compil
 
 ## Drawing tools and custom shapes
 
+### Hi Res Prints and Saving/Reusing Random Seeds
+
+[Print](https://processing.org/tutorials/print/) + Custom code for saving/reusing seeds.
+
 ### Tranformation matrices
 [Tranformation Matrix wiki articke](https://en.wikipedia.org/wiki/Transformation_matrix). Also, [3b1b video on quarternions](https://www.youtube.com/watch?v=d4EgbgTm0Bg).
 
