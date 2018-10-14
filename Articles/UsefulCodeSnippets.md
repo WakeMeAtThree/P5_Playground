@@ -311,6 +311,16 @@ Table generators in markdown
 
 
 ## Utility
+
+### Nodes using inheritance from a library type
+
+```python
+class node(FCircle):
+    def __init__(self,r):
+        FCircle.__init__(self,r)
+        self.switch = False
+```
+
 ### Using decorators to style drawing functions
 Here's a simple example of this workflow:
 ```python
