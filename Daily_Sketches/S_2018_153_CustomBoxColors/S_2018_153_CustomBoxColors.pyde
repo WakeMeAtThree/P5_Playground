@@ -79,12 +79,39 @@ class myBox(object):
                   PVector(X+L,Y+W),
                   PVector(X,Y+W),
                   PVector(X,Y)]
+        sides = [PVector(X,Y+W,0),
+                  PVector(X+L,Y+W,0),
+                  PVector(X+L,Y+W,H),
+                  PVector(X,Y+W,H)]
+        
+        front = [PVector(X,Y,0),
+                  PVector(X,Y+W,0),
+                  PVector(X,Y+W,H),
+                  PVector(X,Y,H)] 
         pairs = [(points[i],points[i+1]) for i in range(len(points)-1)]
         stroke(0)
-        for j in range(0,H+1,5):
+        nums = [14,14,14]
+        #Top Contours
+        for j in range(nums[0]):
+            value = 1.0*j/(nums[0]-1)
             with beginShape():
                 for i in points:
-                    vertex(i.x,i.y,j)
+                    vertex(i.x,i.y,lerp(0,H,value))
+        
+        #Side Contours
+        for j in range(nums[1]):
+            value = 1.0*j/(nums[1]-1)
+            with beginShape():
+                for i in sides:
+                    vertex(i.x,i.y-lerp(0,W,value),i.z)
+        
+        #Front Contours
+        for j in range(nums[2]):
+            value = 1.0*j/(nums[2]-1)
+            with beginShape():
+                for i in front:
+                    vertex(i.x+lerp(0,L,value),i.y,i.z)
+        
         noStroke()
         # Bottom
         fill(self.top)
