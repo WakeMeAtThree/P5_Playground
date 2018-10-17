@@ -8,13 +8,17 @@ def setup():
     #Coordinate transformations
     translate(width/2,height/2)
     rotateX(PI/4)
-    rotateZ(PI/4)
+    rotateZ(PI/6)
     
     #Box display
     background(255)
     Box = myBox(*colors1,wf=False)
-    Box.displayContours(0,0,100,100,100)
     
+    Box.displayShaded(0,0,100,100,100)
+    Box.displayVertices(0,0,100,100,100)
+    Box.displayContours(0,0,100,100,100,contours=[3,25,25])
+    # Box.displayBlended
+    # Box.display
     #Create Side Contours + Other Side Contours to finalize it
 
     
@@ -72,7 +76,7 @@ class myBox(object):
                     for i in pairs[k]:
                         vertex(i.x,i.y,0)
                         vertex(i.x,i.y,H)
-    def displayContours(self,X,Y,L,W,H):
+    def displayContours(self,X,Y,L,W,H,contours=[5,5,5]):
         #background(self.bg)
         points = [PVector(X,Y),
                   PVector(X+L,Y),
@@ -90,51 +94,52 @@ class myBox(object):
                   PVector(X,Y,H)] 
         pairs = [(points[i],points[i+1]) for i in range(len(points)-1)]
         stroke(0)
-        nums = [14,14,14]
+        noFill()
+        nums = [6,6,6]
         #Top Contours
-        for j in range(nums[0]):
-            value = 1.0*j/(nums[0]-1)
+        for j in range(contours[0]):
+            value = 1.0*j/(contours[0]-1)
             with beginShape():
                 for i in points:
                     vertex(i.x,i.y,lerp(0,H,value))
         
         #Side Contours
-        for j in range(nums[1]):
-            value = 1.0*j/(nums[1]-1)
+        for j in range(contours[1]):
+            value = 1.0*j/(contours[1]-1)
             with beginShape():
                 for i in sides:
                     vertex(i.x,i.y-lerp(0,W,value),i.z)
         
         #Front Contours
-        for j in range(nums[2]):
-            value = 1.0*j/(nums[2]-1)
+        for j in range(contours[2]):
+            value = 1.0*j/(contours[2]-1)
             with beginShape():
                 for i in front:
                     vertex(i.x+lerp(0,L,value),i.y,i.z)
         
         noStroke()
-        # Bottom
-        fill(self.top)
-        with beginShape():
-            for i in points:
-                vertex(i.x,i.y,0)
+        ## Bottom
+        # fill(self.top)
+        # with beginShape():
+        #     for i in points:
+        #         vertex(i.x,i.y,0)
         
-        # Top
-        with beginShape():
-            for i in points:
-                vertex(i.x,i.y,H)
-        # Sides
-        for k in [0,2]:
-            with beginShape(QUAD_STRIP):
-                for i in pairs[k]:
-                    vertex(i.x,i.y,0)
-                    vertex(i.x,i.y,H)
-        # Front
-        for k in [1,3]:
-            with beginShape(QUAD_STRIP):
-                for i in pairs[k]:
-                    vertex(i.x,i.y,0)
-                    vertex(i.x,i.y,H)
+        # # Top
+        # with beginShape():
+        #     for i in points:
+        #         vertex(i.x,i.y,H)
+        # # Sides
+        # for k in [0,2]:
+        #     with beginShape(QUAD_STRIP):
+        #         for i in pairs[k]:
+        #             vertex(i.x,i.y,0)
+        #             vertex(i.x,i.y,H)
+        # # Front
+        # for k in [1,3]:
+        #     with beginShape(QUAD_STRIP):
+        #         for i in pairs[k]:
+        #             vertex(i.x,i.y,0)
+        #             vertex(i.x,i.y,H)
         
     def displayWireFrame(self,X,Y,L,W,H):
         #background(self.bg)
@@ -173,6 +178,24 @@ class myBox(object):
                     with beginShape(QUAD_STRIP):
                         for i in pairs[k]:
                             vertex(i.x,i.y,0)
+    def displayVertices(self,X,Y,L,W,H):
+        #background(self.bg)
+        with pushStyle():
+            points = [PVector(0,0),
+                    PVector(L,0),
+                    PVector(L,W),
+                    PVector(0,W),
+                    PVector(0,0)]
+            pairs = [(points[i],points[i+1]) for i in range(len(points)-1)]
+            #noFill()
+            #stroke(self.top)
+            stroke(0)
+            strokeWeight(5)
+            with pushMatrix():
+                translate(X,Y)
+                for i in points:
+                    point(i.x,i.y,0)
+                    point(i.x,i.y,H)
     def displayTops(self,X,Y,L,W,H):
         #background(self.bg)
         points = [PVector(0,0),
