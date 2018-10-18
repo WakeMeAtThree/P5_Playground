@@ -16,10 +16,10 @@ def setup():
     
     Box.displayShaded(0,0,100,100,100)
     Box.displayVertices(0,0,100,100,100)
-    Box.displayContours(0,0,100,100,100,contours=[3,25,25])
+    Box.displayContours(0,0,100,100,100,contours=[8,8,8])
+    Box.displayNormals(0,0,100,100,100)
     # Box.displayBlended
-    # Box.display
-    #Create Side Contours + Other Side Contours to finalize it
+
 
     
 class scene(object):
@@ -42,6 +42,7 @@ class myBox(object):
             self.displayWireFrame(X,Y,L,W,H)
         else:
             self.displayShaded(X,Y,L,W,H)
+    
     def displayShaded(self,X,Y,L,W,H):
         #background(self.bg)
         points = [PVector(X,Y),
@@ -76,6 +77,59 @@ class myBox(object):
                     for i in pairs[k]:
                         vertex(i.x,i.y,0)
                         vertex(i.x,i.y,H)
+    def displayNormals(self,X,Y,L,W,H):
+        #background(self.bg)
+        points = [PVector(X,Y),
+                  PVector(X+L,Y),
+                  PVector(X+L,Y+W),
+                  PVector(X,Y+W),
+                  PVector(X,Y)]
+        pairs = [(points[i],points[i+1]) for i in range(len(points)-1)]
+        midpoints = [PVector.lerp(i,j,0.5) for i,j in pairs]
+        m0,m1,m2,m3 = [PVector(i.x,i.y,H/2.0) for i in midpoints]
+        ext = 120
+        
+        m0.y-=ext
+        m2.y+=ext
+        m1.x+=ext
+        m3.x-=ext
+        
+        stroke(0)
+        line(m0.x,m0.y,m0.z,
+             m2.x,m2.y,m2.z)
+        line(m1.x,m1.y,m1.z,
+             m3.x,m3.y,m3.z)
+        for i in [m0,m1,m2,m3]:
+            strokeWeight(6)
+            point(i.x,i.y,i.z)
+
+            
+        # with pushMatrix():
+        #     #translate(X,Y)
+        #     # Bottom
+        #     fill(self.top)
+        #     with beginShape():
+        #         for i in points:
+        #             vertex(i.x,i.y,0)
+            
+        #     # Top
+        #     with beginShape():
+        #         for i in points:
+        #             vertex(i.x,i.y,H)
+        #     # Sides
+        #     fill(self.side)
+        #     for k in [0,2]:
+        #         with beginShape(QUAD_STRIP):
+        #             for i in pairs[k]:
+        #                 vertex(i.x,i.y,0)
+        #                 vertex(i.x,i.y,H)
+        #     # Front
+        #     fill(self.front)
+        #     for k in [1,3]:
+        #         with beginShape(QUAD_STRIP):
+        #             for i in pairs[k]:
+        #                 vertex(i.x,i.y,0)
+        #                 vertex(i.x,i.y,H)
     def displayContours(self,X,Y,L,W,H,contours=[5,5,5]):
         #background(self.bg)
         points = [PVector(X,Y),
