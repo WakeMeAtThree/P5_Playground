@@ -339,6 +339,15 @@ class node(FCircle):
         self.switch = False
 ```
 
+I found myself doing the following as a way not having to add new objects in fisica to world at every single time.
+
+```python
+class Join(FDistanceJoint):
+    def __init__(self,a,b):
+        FDistanceJoint.__init__(self,a,b)
+        world.add(self) 
+```
+
 ### Using decorators to style drawing functions
 Here's a simple example of this workflow:
 ```python
