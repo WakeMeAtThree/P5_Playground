@@ -12,11 +12,29 @@ I find myself returning to a lot of repeated code, and so I've decided to compil
 [Tranformation Matrix wiki articke](https://en.wikipedia.org/wiki/Transformation_matrix). Also, [3b1b video on quarternions](https://www.youtube.com/watch?v=d4EgbgTm0Bg).
 
 ```python
-def vec_rotateY( v, angle):
+def myRect(X,Y,L,W,angle):
+    points = [PVector(-L/2.0,W/2.0),
+              PVector(L/2.0,W/2.0),
+              PVector(L/2.0,-W/2.0),
+              PVector(-L/2.0,-W/2.0),
+              PVector(-L/2.0,W/2.0)]
+    points = [rotate_Z(i,angle) for i in points]
+    points = [i.add(PVector(X,Y)) for i in points]
+    return points
+
+# Make both similar syntax
+
+def rotate_Y( v, angle):
     x = v.x*cos(angle)+v.z*sin(angle)
     y = v.y
     z = -v.x*sin(angle)+v.z*cos(angle)
     return PVector(x,y,z)
+
+def rotate_Z(p,angle):
+    rP = PVector(p.x*cos(angle)-p.y*sin(angle),
+                 p.x*sin(angle)+p.y*cos(angle),
+                 p.z)
+    return rP
 ```
 
 ### Revolve
@@ -319,6 +337,15 @@ class node(FCircle):
     def __init__(self,r):
         FCircle.__init__(self,r)
         self.switch = False
+```
+
+I found myself doing the following as a way not having to add new objects in fisica to world at every single time.
+
+```python
+class Join(FDistanceJoint):
+    def __init__(self,a,b):
+        FDistanceJoint.__init__(self,a,b)
+        world.add(self) 
 ```
 
 ### Using decorators to style drawing functions
