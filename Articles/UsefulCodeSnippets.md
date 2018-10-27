@@ -329,6 +329,51 @@ Table generators in markdown
 
 
 ## Utility
+### Accessing operator functions
+Friendly reminder to use operators in classes for better code-readability (see custom Fisica class)
+
+```python
+class vec3(PVector):
+    def __init__(self,x,y,z):
+        PVector.__init__(self,x,y,z)
+    def __add__(self,other):
+        return PVector(self.x+other.x,
+                       self.y+other.y,
+                       self.z+other.z)
+    def __mul__(self,other):
+        if(isinstance(other,PVector)):
+            return PVector(self.x*other.x,
+                           self.y*other.y,
+                           self.z*other.z)
+        else:
+            return PVector(self.x*other,
+                           self.y*other,
+                           self.z*other)
+    def __neg__(self,other):
+        other = other * -1
+        return self + other
+    def __div__(self,other):
+        return PVector(self.x/other.x,
+                       self.y/other.y,
+                       self.z/other.z)
+    def __pow__(self,other):
+        return PVector(self.x**other,
+                       self.y**other,
+                       self.z**other)
+```
+
+Example: 
+```python
+def setup():
+    size(400,400)
+    a = vec3(1,2,3)
+    b = vec3(4,5,6)
+    print("Addition ", a + b)
+    print("Multiplication ", a * b)
+    print("Negation ", a * -1)
+    print("Division ", a / b )
+    print("Power ", a ** 2)
+```
 
 ### Nodes using inheritance from a library type
 
