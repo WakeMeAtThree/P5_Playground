@@ -330,7 +330,7 @@ Table generators in markdown
 
 ## Utility
 ### Accessing operator functions
-Friendly reminder to use operators in classes for better code-readability (see custom Fisica class)
+Friendly reminder to use operators in classes for better code-readability (see custom Fisica class and see this [operator reference](https://docs.python.org/2/library/operator.html))
 
 ```python
 class vec3(PVector):
