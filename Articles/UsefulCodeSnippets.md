@@ -294,6 +294,12 @@ I have compiled all of this into a simple bat file that I keep reusing under the
 @echo off
 cmd /k "ffmpeg -start_number 1 -framerate 30 -i animation%%3d.png -pix_fmt yuv420p output.mp4 & pause & ffmpeg -i output.mp4 -vf palettegen palette.png & pause & ffmpeg -i output.mp4 -i palette.png -filter_complex ""fps=30,scale=400:-1:flags=lanczos[x];[x][1:v]paletteuse"" output.gif"
 ```
+
+I've been using scale function more often nowadays. Render to 1000x1000, then scale to 400x400:
+```terminal
+ffmpeg -i output.mp4 -vf scale=400:-1 out.mp4
+```
+
 ### Processing
 Running a processing sketch in terminal [Check this out](https://github.com/processing/processing/wiki/Command-Line):
 
