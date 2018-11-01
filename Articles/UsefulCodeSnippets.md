@@ -54,7 +54,12 @@ def revolve(section):
 ```
 
 ### Catenary curve
-Useful source for drawing a catenary curve: http://mathworld.wolfram.com/Catenary.html (note to self: prep cycloid curve as well)
+~Useful source for drawing a catenary curve: http://mathworld.wolfram.com/Catenary.html (note to self: prep cycloid curve as well).~ Will be using a solver like fisica for this, but I need to define an `orient(geom,a,b)` function:
+
+```python
+def orient(geom,a,b):
+    pass
+```
 
 ### Generate points between two points
 This function will take two points and return a specified number of points.
