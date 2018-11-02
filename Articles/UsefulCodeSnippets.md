@@ -540,6 +540,13 @@ I like to use this so I can have a nice axonometric. This should become a proces
         0.0, 0.0, 1.0,  0.0,
         0.0, 0.0, 0.0,  1.0);
 ```
+Actually, scratch the previous technique out. Today I realized that I could just represent this matrix using the native transformations available, which is faster and gets me the result I originally wanted:
+```
+    with pushMatrix():
+        rotateY(PI/2)
+        shearY(-PI/4)
+        rotateY(-PI/2)
+```
 
 ### Eases
 I like using smoothsteps a lot, and if I need it to be periodic, I'll just smoothstep a sin function. If there was a need to create multiple steps, I scale down the results of one smoothstep, and add another smoothsteps to take have more than two steps.
