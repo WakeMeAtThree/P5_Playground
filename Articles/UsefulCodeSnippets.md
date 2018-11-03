@@ -54,7 +54,7 @@ def revolve(section):
 ```
 
 ### Catenary curve
-~Useful source for drawing a catenary curve: http://mathworld.wolfram.com/Catenary.html (note to self: prep cycloid curve as well).~ Will be using a solver like fisica for this, but I need to define an `orient(geom,a,b)` function:
+~Useful source for drawing a catenary curve: http://mathworld.wolfram.com/Catenary.html (note to self: prep cycloid curve as well).~ Will be using a solver like fisica for this, but I need to define an `orient(geom,a,b)` function (CENTER, CORNER, CORNERS) modes:
 
 ```python
 def orient(geom,a,b):
