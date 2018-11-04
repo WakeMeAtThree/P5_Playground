@@ -340,6 +340,14 @@ Table generators in markdown
 
 
 ## Utility
+### Storing trails
+I first did this by appending to a list intialized with max item length and deleting the first item of the list simulataneously. Another approach is to use a `deque`:
+
+```python
+from collections import deque
+trail = deque([1,2,3,4,5],maxlen=5)
+```
+
 ### Accessing operator functions
 Friendly reminder to use operators in classes for better code-readability (see custom Fisica class and see this [operator reference](https://docs.python.org/2/library/operator.html))
 
