@@ -340,6 +340,9 @@ Table generators in markdown
 
 
 ## Utility
+
+### Arabic Reshaper
+Good reference [here](http://mpcabd.xyz/python-arabic-text-reshaper/). It's still an issue in Processing and other programs unfortunately and I am still resorting to manually typing unicode in some cases and using this [table for reference](https://en.wikipedia.org/wiki/Arabic_script_in_Unicode). 
 ### Storing trails
 I first did this by appending to a list intialized with max item length and deleting the first item of the list simulataneously. Another approach is to use a `deque`:
 
