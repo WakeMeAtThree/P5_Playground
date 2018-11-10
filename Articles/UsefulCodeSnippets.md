@@ -338,6 +338,20 @@ Table generators in markdown
 - [Markdown table generator](https://www.tablesgenerator.com/markdown_tables#)
 - [Another table generator](https://donatstudios.com/CsvToMarkdownTable)
 
+Renaming my animation sequences (need to manually delete frames sometimes):
+
+```python
+import os
+
+old = [i.split("animation")[1].split(".tga")[0] for i in os.listdir(".") if i.endswith("tga")]
+new = [str(i).zfill(3) for i in range(len(old))]
+
+oldnames = ["animation{}.tga".format(i) for i in old]
+newnames = ["animation{}.tga".format(i) for i in new]
+
+for i,j in zip(oldnames,newnames):
+    os.rename(i,j)
+```
 
 ## Utility
 
