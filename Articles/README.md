@@ -11,3 +11,4 @@ WIP
 - [ ] Pen and paper sketches of code
 - [ ] Colors (phase shift+color sorting+fbms)
 - [ ] Combinatorics
+- [ ] Interactive Typography Tools
