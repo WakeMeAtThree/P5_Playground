@@ -767,3 +767,17 @@ for i in x:
 
 a= [j for i in a for j in i]
 ```
+
+Quick combinations from `x` (initial point `y` mapped to target points `z`):
+
+```python
+import rhinoscriptsyntax as rs
+from random import choice,sample
+
+selection = [choice(x) for i in range(3)]
+a = []
+translation = [rs.VectorSubtract(i,y) for i in z]
+
+for i,j in zip(selection,translation):
+    a.append(rs.MoveObject(i,j))
+```
