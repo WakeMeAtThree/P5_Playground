@@ -755,3 +755,15 @@ int getMinP(float list[number]) {
 }
 ```
 
+# Rhino
+
+Matrix of intersections (where x and y are two different sets of extrusions that intersect):
+```python
+import rhinoscriptsyntax as rs
+a = []
+for i in x:
+    for j in y:
+        a.append(rs.BooleanIntersection(i,j,delete_input=False))
+
+a= [j for i in a for j in i]
+```
