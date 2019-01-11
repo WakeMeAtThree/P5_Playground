@@ -781,3 +781,71 @@ translation = [rs.VectorSubtract(i,y) for i in z]
 for i,j in zip(selection,translation):
     a.append(rs.MoveObject(i,j))
 ```
+
+## Animations in Rhino
+```python
+import rhinoscriptsyntax as rs
+from math import *
+
+
+def norm(t, a, b):
+    return (t-a)/(b-a);
+def remap(t, a, b, c, d):
+    return norm(t, a, b) * (d-c) + c
+def constrain(x,min,max):
+    if(x < min): 
+        return min
+    elif(x>max): 
+        return max
+    return x
+def smoothstep(edge0, edge1, x):
+    x = constrain((x - edge0) / (edge1 - edge0), 0.0, 1.0)
+    return x * x * (3 - 2 * x)
+def lerp(v0, v1, t):
+	return (1-t) * v0 + t * v1
+def sn(q): return smoothstep(0.0,0.8,remap(sin(q),-1,1,0,1))
+
+
+def saveFrame(file_name):
+    view_size = rs.ViewSize()
+    
+    common_options = " _Width={} _Height={}".format(view_size[0],view_size[1])
+    common_options += " _Scale={}".format(1)
+    common_options += " _DrawGrid=_No _DrawWorldAxes=_No _DrawCPlaneAxes=_No"
+    transp = '_No'
+    cmd  = '-_ViewCaptureToFile'
+    cmd += common_options
+    cmd += " _TransparentBackground={}".format(transp)
+    cmd += ' "{}"'.format(file_name)
+    cmd += " _Enter"
+    
+    
+    rs.Command(cmd, echo=False)
+
+
+objects = rs.GetObjects("Get me a surface")
+center_point = rs.GetObject("Get me a point",filter=1)
+multiplier = 5.0
+resolution = 600
+
+rs.EnableRedraw(False)
+for i in range(resolution):
+    index = 1.0*i/(resolution-1)
+    angle = index*2.0*pi
+    
+    for index,obj in enumerate(objects): 
+        delay = multiplier*index/(len(objects))
+        amt = sn(angle+delay)
+        rs.RotateObject(obj,center_point,lerp(0,180,amt))
+        
+    #rs.EnableRedraw(True)
+    saveFrame("animation{:03d}.jpg".format(i))
+    #rs.EnableRedraw(False)
+    
+    for index,obj  in enumerate(objects):
+        delay = multiplier*index/(len(objects))
+        amt = sn(angle+delay)
+        rs.RotateObject(obj,center_point,-lerp(0,180,amt))
+
+print("ANIMATION DONE!")
+```
